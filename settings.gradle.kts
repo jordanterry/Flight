@@ -24,5 +24,8 @@ dependencyResolutionManagement {
 rootProject.name = "Flights"
 include(":app")
 include(":features:flight")
+include(":features:flight:api")
+include(":features:flight:internal")
+include(":features:flight:di")
 include(":features:home")
 include(":features:search")

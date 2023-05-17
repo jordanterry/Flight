@@ -5,6 +5,7 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
+@Suppress("UnstableApiUsage")
 fun Project.configureAndroid(
     extension: CommonExtension<*, *, *, *>,
     javaVersion: JavaVersion
@@ -18,6 +19,12 @@ fun Project.configureAndroid(
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
             isCoreLibraryDesugaringEnabled = true
+        }
+        buildFeatures {
+            compose = true
+        }
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.4.6"
         }
     }
     dependencies {

@@ -1,5 +1,7 @@
 plugins {
     id("jt.android.application")
+    kotlin("kapt")
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -20,12 +22,20 @@ android {
         }
     }
 }
+kapt {
+    correctErrorTypes = true
+}
 
 dependencies {
+    implementation(projects.features.flight)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.slack.circuit)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
-    testImplementation(test.junit)
-    androidTestImplementation(test.androidx.junit)
-    androidTestImplementation(test.androidx.espresso)
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
 }
