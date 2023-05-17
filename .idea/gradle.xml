@@ -25,6 +25,10 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/conventions" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/flight" />
+            <option value="$PROJECT_DIR$/features/home" />
+            <option value="$PROJECT_DIR$/features/search" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -23,3 +23,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Flights"
 include(":app")
+include(":features:flight")
+include(":features:home")
+include(":features:search")

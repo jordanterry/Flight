@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.LibraryExtension
 import extensions.configureAndroid
 import extensions.configureJvm
 import extensions.configureKotlin
@@ -9,14 +10,15 @@ import org.gradle.kotlin.dsl.configure
 
 class AndroidLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
+        val javaVersion = JavaVersion.VERSION_1_8
         with (target) {
             pluginManager.apply("com.android.library")
-            pluginManager.apply("org.jetbrains.kotlin.kt.android")
-            extensions.configure<ApplicationExtension> {
-                configureAndroid(this)
+            pluginManager.apply("org.jetbrains.kotlin.android")
+            extensions.configure<LibraryExtension> {
+                configureAndroid(this, javaVersion)
             }
-            configureJvm(JavaVersion.VERSION_11)
-            configureKotlin(JavaVersion.VERSION_11)
+            configureJvm(javaVersion)
+            configureKotlin(javaVersion)
         }
     }
 }

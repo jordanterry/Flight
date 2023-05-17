@@ -9,10 +9,11 @@ import org.gradle.kotlin.dsl.configure
 
 class KotlinLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
+        val javaVersion = JavaVersion.VERSION_1_8
         with(target) {
-            pluginManager.apply("org.jetbrains.kotlin.kt.jvm")
-            configureJvm(JavaVersion.VERSION_11)
-            configureKotlin(JavaVersion.VERSION_11)
+            pluginManager.apply("org.jetbrains.kotlin.jvm")
+            configureJvm(javaVersion)
+            configureKotlin(javaVersion)
         }
     }
 }

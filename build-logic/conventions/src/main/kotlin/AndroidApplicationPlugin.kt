@@ -9,14 +9,15 @@ import org.gradle.kotlin.dsl.configure
 
 class AndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project) {
+        val javaVersion = JavaVersion.VERSION_1_8
         with(target) {
             pluginManager.apply("com.android.application")
             pluginManager.apply("org.jetbrains.kotlin.android")
             extensions.configure<ApplicationExtension> {
-                configureAndroid(this)
+                configureAndroid(this, javaVersion)
             }
-            configureJvm(JavaVersion.VERSION_11)
-            configureKotlin(JavaVersion.VERSION_11)
+            configureJvm(javaVersion)
+            configureKotlin(javaVersion)
         }
     }
 }
