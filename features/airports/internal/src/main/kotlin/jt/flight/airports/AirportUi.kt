@@ -1,4 +1,4 @@
-package jt.flight.flight
+package jt.flight.airports
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
@@ -9,9 +9,9 @@ import com.slack.circuit.runtime.Screen
 import com.slack.circuit.runtime.ui.Ui
 import javax.inject.Inject
 
-class FlightUi : Ui<FlightScreen.CounterState> {
+class FlightUi : Ui<AirportScreen.CounterState> {
     @Composable
-    override fun Content(state: FlightScreen.CounterState, modifier: Modifier) {
+    override fun Content(state: AirportScreen.CounterState, modifier: Modifier) {
         Box {
             Text(state.title)
         }
@@ -21,7 +21,7 @@ class FlightUi : Ui<FlightScreen.CounterState> {
 class FlightUiFactory @Inject constructor() : Ui.Factory {
     override fun create(screen: Screen, context: CircuitContext): Ui<*>? {
         return when(screen) {
-            is FlightScreen -> FlightUi()
+            is AirportScreen -> FlightUi()
             else -> null
         }
     }

@@ -7,7 +7,7 @@ import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.CircuitConfig
 import com.slack.circuit.foundation.CircuitContent
 import dagger.hilt.android.AndroidEntryPoint
-import jt.flight.flight.FlightScreen
+import jt.flight.airports.AirportScreen
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -19,7 +19,7 @@ class FlightActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CircuitCompositionLocals(circuitConfig) {
-                CircuitContent(FlightScreen())
+                CircuitContent(AirportScreen())
             }
         }
     }
