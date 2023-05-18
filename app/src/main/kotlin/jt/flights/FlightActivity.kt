@@ -1,4 +1,4 @@
-package uk.co.jordanterry.flights
+package jt.flights
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

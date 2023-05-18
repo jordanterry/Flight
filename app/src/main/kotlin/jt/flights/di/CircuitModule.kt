@@ -1,4 +1,4 @@
-package uk.co.jordanterry.flights.di
+package jt.flights.di
 
 import com.slack.circuit.foundation.CircuitConfig
 import com.slack.circuit.runtime.presenter.Presenter

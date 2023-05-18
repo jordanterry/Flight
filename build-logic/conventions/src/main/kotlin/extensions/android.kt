@@ -13,7 +13,7 @@ internal fun Project.configureAndroid(
     with (extension) {
         compileSdk = 33
         defaultConfig {
-            minSdk = 21
+            minSdk = 28
         }
         compileOptions {
             sourceCompatibility = javaVersion
