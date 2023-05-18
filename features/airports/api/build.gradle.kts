@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "jt.flight.flight.api"
+    namespace = "jt.flight.airports.api"
 }
 
 dependencies {

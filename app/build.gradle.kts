@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "uk.co.jordanterry.flights"
+    namespace = "jt.flights"
 
     defaultConfig {
-        applicationId = "uk.co.jordanterry.flights"
+        applicationId = "jt.flights"
         versionCode = 1
         versionName = "1.0"
 
@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled =  true
+            isMinifyEnabled = true
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
         }
     }
@@ -27,7 +27,7 @@ kapt {
 }
 
 dependencies {
-    implementation(projects.features.flight)
+    implementation(projects.features.airports)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.activity)

@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "jt.flight.flight.internal"
+    namespace = "jt.flight.airports.internal"
 }
 
 dependencies {
-    api(projects.features.flight.api)
+    api(projects.features.airports.api)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.foundation)

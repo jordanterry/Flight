@@ -5,6 +5,7 @@ plugins {
 dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.spotless.gradlePlugin)
 }
 
 version = "0.1"

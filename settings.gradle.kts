@@ -6,6 +6,9 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
     }
 }
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
@@ -14,6 +17,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
+
     }
     versionCatalogs {
         create("test") {
@@ -23,9 +30,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Flights"
 include(":app")
-include(":features:flight")
-include(":features:flight:api")
-include(":features:flight:internal")
-include(":features:flight:di")
+include(":features:airports")
+include(":features:airports:api")
+include(":features:airports:internal")
+include(":features:airports:di")
 include(":features:home")
 include(":features:search")

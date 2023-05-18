@@ -21,7 +21,7 @@ class FlightUi : Ui<FlightScreen.CounterState> {
 class FlightUiFactory @Inject constructor() : Ui.Factory {
     override fun create(screen: Screen, context: CircuitContext): Ui<*>? {
         return when(screen) {
-            is jt.flight.flight.FlightScreen -> FlightUi()
+            is FlightScreen -> FlightUi()
             else -> null
         }
     }

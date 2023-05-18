@@ -6,7 +6,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 @Suppress("UnstableApiUsage")
-fun Project.configureAndroid(
+internal fun Project.configureAndroid(
     extension: CommonExtension<*, *, *, *>,
     javaVersion: JavaVersion
 ) {
