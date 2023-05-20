@@ -9,9 +9,9 @@ import com.slack.circuit.runtime.Screen
 import com.slack.circuit.runtime.ui.Ui
 import javax.inject.Inject
 
-class FlightUi : Ui<AirportScreen.CounterState> {
+class FlightUi : Ui<AirportScreen.AirportState> {
     @Composable
-    override fun Content(state: AirportScreen.CounterState, modifier: Modifier) {
+    override fun Content(state: AirportScreen.AirportState, modifier: Modifier) {
         Box {
             Text(state.title)
         }

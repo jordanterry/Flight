@@ -28,12 +28,13 @@ kapt {
 
 dependencies {
     implementation(projects.features.airports)
+    implementation(projects.features.home)
+    implementation(projects.features.search)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.slack.circuit)
-    implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
     implementation(libs.dagger.hilt.android)

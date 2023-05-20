@@ -1,4 +1,4 @@
-package jt.flight.airports
+package jt.flight.search
 
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.ui.Ui
@@ -6,17 +6,16 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dagger.multibindings.IntoSet
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-interface AirportModule {
+interface SearchModule {
     @Binds
     @IntoSet
-    fun bindsFlightPresenterFactory(flightPresenterFactory: FlightPresenterFactory): Presenter.Factory
+    fun bindSearchPresenterFactory(searchPresenterFactory: SearchPresenterFactory): Presenter.Factory
 
     @Binds
     @IntoSet
-    fun bindsFlightUiFactory(flightUiFactory: FlightUiFactory): Ui.Factory
+    fun bindsSearchUiFactory(searchUiFactory: SearchUiFactory): Ui.Factory
 }

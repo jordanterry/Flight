@@ -9,5 +9,5 @@ android {
 dependencies {
     api(projects.features.airports.api)
     api(projects.features.airports.di)
-    api(projects.features.airports.internal)
+    api(projects.features.airports.implementation)
 }

@@ -2,10 +2,11 @@ plugins {
     id("jt.android.library")
     kotlin("kapt")
     alias(libs.plugins.dagger.hilt)
+    alias(test.plugins.cash.paparazzi)
 }
 
 android {
-    namespace = "jt.flight.airports.internal"
+    namespace = "jt.flight.airports.implementation"
 }
 
 dependencies {

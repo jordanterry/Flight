@@ -6,10 +6,11 @@ import com.slack.circuit.runtime.ui.Ui
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 
 @Module
-@InstallIn(ActivityRetainedScoped::class)
+@InstallIn(ActivityRetainedComponent::class)
 class CircuitModule {
     @Provides
     fun providesCircuitConfig(

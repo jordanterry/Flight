@@ -1,4 +1,4 @@
-package jt.flight.airports
+package jt.flight.home
 
 import androidx.compose.runtime.Composable
 import com.slack.circuit.runtime.CircuitContext
@@ -9,21 +9,21 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import javax.inject.Inject
 
-class FlightPresenter @AssistedInject constructor(
-) : Presenter<AirportScreen.CounterState> {
+class HomePresenter @AssistedInject constructor(
+) : Presenter<HomeScreen.HomeState> {
     @Composable
-    override fun present(): AirportScreen.CounterState {
-        return AirportScreen.CounterState("Hello")
+    override fun present(): HomeScreen.HomeState {
+        return HomeScreen.HomeState("Hello")
     }
 
     @AssistedFactory
     fun interface Factory {
-        fun create(): FlightPresenter
+        fun create(): HomePresenter
     }
 }
 
-class FlightPresenterFactory @Inject constructor(
-    private val flightPresenterFactory: FlightPresenter.Factory
+class HomePresenterFactory @Inject constructor(
+    private val homePresenterFactory: HomePresenter.Factory
 ) : Presenter.Factory {
     override fun create(
         screen: Screen,
@@ -31,7 +31,7 @@ class FlightPresenterFactory @Inject constructor(
         context: CircuitContext
     ): Presenter<*>? {
         return when (screen) {
-            is AirportScreen -> flightPresenterFactory.create()
+            is HomeScreen -> homePresenterFactory.create()
             else -> null
         }
     }

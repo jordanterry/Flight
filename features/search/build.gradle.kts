@@ -3,5 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "jt.flight.search"
+    namespace = "jt.features.search"
+}
+
+dependencies {
+    api(projects.features.search.api)
+    api(projects.features.search.di)
+    api(projects.features.search.implementation)
 }

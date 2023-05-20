@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    namespace = "jt.flight.airports.di"
+    namespace = "jt.flight.search.di"
 }
 
 dependencies {
-    api(projects.features.airports.api)
-    implementation(projects.features.airports.implementation)
+    api(projects.features.search.api)
+    implementation(projects.features.search.implementation)
 
     implementation(libs.slack.circuit)
     implementation(libs.dagger.hilt.android)

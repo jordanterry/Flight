@@ -1,12 +1,12 @@
-package jt.flight.airports
+package jt.flight.home
 
 import com.slack.circuit.runtime.CircuitUiState
 import com.slack.circuit.runtime.Screen
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class AirportScreen : Screen {
-    data class AirportState(
+class HomeScreen : Screen {
+    data class HomeState(
         val title: String,
     ) : CircuitUiState
 }
