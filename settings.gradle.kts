@@ -29,11 +29,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Flights"
+
 include(":app")
-include(":features:airports")
-include(":features:airports:api")
-include(":features:airports:implementation")
-include(":features:airports:di")
+
 include(":features:home")
 include(":features:home:api")
 include(":features:home:implementation")
@@ -42,3 +40,7 @@ include(":features:search")
 include(":features:search:api")
 include(":features:search:implementation")
 include(":features:search:di")
+
+include(":services:flightaware:api")
+include(":services:flightaware:impl")
+include(":services:flightaware:di")

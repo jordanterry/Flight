@@ -10,10 +10,19 @@ import dagger.assisted.AssistedInject
 import javax.inject.Inject
 
 class HomePresenter @AssistedInject constructor(
-) : Presenter<HomeScreen.HomeState> {
+) : Presenter<HomeScreen.State> {
     @Composable
-    override fun present(): HomeScreen.HomeState {
-        return HomeScreen.HomeState("Hello")
+    override fun present(): HomeScreen.State {
+        return HomeScreen.State(
+            title = "Is your flight delayed?",
+            initialFlightNumber = ""
+        ) { event ->
+            when (event) {
+                is HomeScreen.Events.FlightNumberUpdated -> {
+                    // Do something with this.
+                }
+            }
+        }
     }
 
     @AssistedFactory

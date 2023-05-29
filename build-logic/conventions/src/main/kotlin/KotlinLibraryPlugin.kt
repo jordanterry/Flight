@@ -1,5 +1,6 @@
 import extensions.configureJvm
 import extensions.configureKotlin
+import extensions.configureLint
 import extensions.configureSpotless
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -11,6 +12,7 @@ class KotlinLibraryPlugin : Plugin<Project> {
         val javaVersion = JavaVersion.VERSION_1_8
         with(target) {
             pluginManager.apply("org.jetbrains.kotlin.jvm")
+            configureLint()
             configureJvm(javaVersion)
             configureKotlin(javaVersion)
             configureSpotless()

@@ -27,9 +27,10 @@ kapt {
 }
 
 dependencies {
-    implementation(projects.features.airports)
     implementation(projects.features.home)
     implementation(projects.features.search)
+
+    implementation(projects.services.flightaware)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.activity)

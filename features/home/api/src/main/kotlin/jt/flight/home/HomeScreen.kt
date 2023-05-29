@@ -6,7 +6,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class HomeScreen : Screen {
-    data class HomeState(
+    data class State(
         val title: String,
+        val initialFlightNumber: String,
+        val eventSink: (Events) -> Unit
     ) : CircuitUiState
+
+    sealed class Events {
+        data class FlightNumberUpdated(
+            val flightNumber: String,
+        ) : Events()
+    }
 }

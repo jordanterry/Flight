@@ -5,14 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "jt.flight.airports.di"
+    namespace = "jt.flight.flightaware.di"
 }
 
 dependencies {
-    api(projects.features.airports.api)
-    implementation(projects.features.airports.implementation)
+    api(projects.services.flightaware.api)
+    implementation(projects.services.flightaware.impl)
 
-    implementation(libs.slack.circuit)
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
 }
