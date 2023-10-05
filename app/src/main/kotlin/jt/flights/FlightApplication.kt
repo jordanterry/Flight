@@ -1,7 +1,11 @@
 package jt.flights
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import jt.flights.di.AppComponent
 
-@HiltAndroidApp
-class FlightApplication : Application()
+class FlightApplication : Application() {
+
+    private val appComponent by lazy { AppComponent.create(this) }
+
+    fun appComponent() = appComponent
+}

@@ -1,25 +1,30 @@
 package jt.flights.di
 
-import com.slack.circuit.foundation.CircuitConfig
+import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.ui.Ui
+import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.multibindings.Multibinds
 
+@ContributesTo(AppScope::class)
 @Module
-@InstallIn(ActivityRetainedComponent::class)
-class CircuitModule {
-    @Provides
-    fun providesCircuitConfig(
-        uiFactories: Set<@JvmSuppressWildcards Ui.Factory>,
-        presenterFactories: Set<@JvmSuppressWildcards Presenter.Factory>
-    ): CircuitConfig {
-        return CircuitConfig.Builder().apply {
-            addUiFactories(uiFactories)
-            addPresenterFactories(presenterFactories)
-        }.build()
+interface CircuitModule {
+    @Multibinds fun presenterFactories(): Set<Presenter.Factory>
+
+    @Multibinds fun viewFactories(): Set<Ui.Factory>
+
+    companion object {
+        @Provides
+        fun provideCircuit(
+            presenterFactories: @JvmSuppressWildcards Set<Presenter.Factory>,
+            uiFactories: @JvmSuppressWildcards Set<Ui.Factory>,
+        ): Circuit {
+            return Circuit.Builder()
+                .addPresenterFactories(presenterFactories)
+                .addUiFactories(uiFactories)
+                .build()
+        }
     }
 }

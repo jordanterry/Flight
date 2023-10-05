@@ -1,25 +1,35 @@
 package jt.flights
 
+import android.app.Activity
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import com.slack.circuit.backstack.rememberSaveableBackStack
+import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
-import com.slack.circuit.foundation.CircuitConfig
-import com.slack.circuit.foundation.CircuitContent
-import dagger.hilt.android.AndroidEntryPoint
-import jt.flight.home.HomeScreen
+import com.slack.circuit.foundation.NavigableCircuitContent
+import com.slack.circuit.foundation.rememberCircuitNavigator
+import com.squareup.anvil.annotations.ContributesMultibinding
+import jt.flights.di.ActivityKey
+import jt.flights.di.AppScope
+import jt.flights.search.SearchScreen
 import javax.inject.Inject
 
-@AndroidEntryPoint
-class FlightActivity : AppCompatActivity() {
-    @Inject
-    lateinit var circuitConfig: CircuitConfig
+@ContributesMultibinding(AppScope::class, boundType = Activity::class)
+@ActivityKey(FlightActivity::class)
+class FlightActivity @Inject constructor(
+    private val circuit: Circuit,
+) : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CircuitCompositionLocals(circuitConfig) {
-                CircuitContent(HomeScreen())
+            CircuitCompositionLocals(circuit) {
+                val backstack = rememberSaveableBackStack { push(SearchScreen) }
+                BackHandler(onBack = { /* do something on root */ })
+                val navigator = rememberCircuitNavigator(backstack)
+                NavigableCircuitContent(navigator, backstack)
             }
         }
     }

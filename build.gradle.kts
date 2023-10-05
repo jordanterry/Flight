@@ -1,7 +1,8 @@
 plugins {
-    alias(libs.plugins.android.application.gradlePlugin) apply false
-    alias(libs.plugins.android.library.gradlePlugin) apply false
-    alias(libs.plugins.kotlin.gradlePlugin) apply false
-    alias(libs.plugins.dagger.hilt) apply false
-    alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.ksp) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.square.anvil) apply false
 }
