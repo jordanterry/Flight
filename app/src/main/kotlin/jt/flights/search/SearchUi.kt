@@ -1,5 +1,8 @@
 package jt.flights.search
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -31,5 +34,9 @@ class SearchUiFactory @Inject constructor() : Ui.Factory {
 
 @Composable
 fun Search(state: SearchScreen.UiState, modifier: Modifier = Modifier) {
-    Text("Hello")
+    Column(modifier = modifier) {
+        Button(onClick = { /*TODO*/ }) {
+            Text(text = "Search")
+        }
+    }
 }
