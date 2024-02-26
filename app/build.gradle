@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.square.anvil)
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.22'
 }
 
 android {
@@ -17,6 +18,7 @@ android {
     kotlin {
         jvmToolchain(JavaLanguageVersion.of(17).asInt())
     }
+
 
     buildFeatures {
         compose = true
@@ -45,8 +47,16 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
     implementation(libs.dagger)
-    implementation(libs.square.anvil.annotations)
     kapt(libs.dagger.compiler)
+    implementation(libs.square.anvil.annotations)
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
+    implementation(platform(libs.square.okhttp.platform))
+    implementation(libs.square.okhttp)
+    implementation(libs.square.okhttp.logging.interceptor)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.manifest)
 }

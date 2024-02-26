@@ -2,10 +2,12 @@ package jt.flights
 
 import android.app.Application
 import jt.flights.di.AppComponent
+//import jt.flights.di.DaggerAppComponent
+import jt.flights.networking.NetworkingComponent
 
 class FlightApplication : Application() {
 
-    private val appComponent by lazy { AppComponent.create(this) }
+    private val appComponent: AppComponent by lazy { AppComponent.create(this) }
 
     fun appComponent() = appComponent
 }

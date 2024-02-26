@@ -8,14 +8,7 @@ import dagger.Component
 import javax.inject.Provider
 
 @SingleIn(AppScope::class)
-@MergeComponent(
-    scope = AppScope::class,
-    modules =
-    [
-        CircuitModule::class,
-        ActivityModule::class,
-    ]
-)
+@MergeComponent(AppScope::class)
 interface AppComponent {
     val activityProviders: Map<Class<out Activity>, Provider<Activity>>
 

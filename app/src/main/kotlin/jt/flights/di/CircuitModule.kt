@@ -8,7 +8,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.Multibinds
 
-@ContributesTo(AppScope::class)
+@ContributesTo(
+    scope = AppScope::class
+)
 @Module
 interface CircuitModule {
     @Multibinds fun presenterFactories(): Set<Presenter.Factory>
