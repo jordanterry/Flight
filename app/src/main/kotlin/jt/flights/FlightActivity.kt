@@ -13,10 +13,7 @@ import com.slack.circuit.foundation.rememberCircuitNavigator
 import com.squareup.anvil.annotations.ContributesMultibinding
 import jt.flights.di.ActivityKey
 import jt.flights.di.AppScope
-import jt.flights.di.CircuitComponent
-import jt.flights.di.CircuitScope
 import jt.flights.search.SearchScreen
-import jt.flights.search.data.FlightAwareSearchDataSource
 import javax.inject.Inject
 
 @ContributesMultibinding(AppScope::class, boundType = Activity::class)
