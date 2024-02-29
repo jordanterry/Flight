@@ -49,14 +49,14 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
     implementation(libs.square.anvil.annotations)
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation libs.kotlin.test
     testImplementation(libs.square.okhttp.mockwebserver)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
     implementation(platform(libs.square.okhttp.platform))
     implementation(libs.square.okhttp)
     implementation(libs.square.okhttp.logging.interceptor)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation(libs.kotlinx.coroutines)
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.manifest)

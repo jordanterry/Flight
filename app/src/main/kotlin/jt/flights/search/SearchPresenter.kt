@@ -1,6 +1,5 @@
 package jt.flights.search
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.slack.circuit.runtime.CircuitContext
@@ -9,8 +8,6 @@ import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
 import com.squareup.anvil.annotations.ContributesMultibinding
 import jt.flights.di.AppScope
-import jt.flights.search.data.FlightAwareSearchDataSource
-import jt.flights.search.data.FlightAwareSearchRepository
 import jt.flights.search.data.SearchRepository
 import javax.inject.Inject
 

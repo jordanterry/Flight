@@ -1,6 +1,3 @@
 package jt.flights.search
 
-class SearchTest {
-
-
-}
+class SearchTest

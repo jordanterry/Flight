@@ -2,8 +2,8 @@
 agp = "8.2.2"
 androidx-activity = "1.8.2"
 androidx-appcompat = "1.6.1"
-androidx-compose-bom = "2024.01.00"
-androidx-compose = "1.6.0"
+androidx-compose-bom = "2024.02.01"
+androidx-compose = "1.6.2"
 androidx-activity-compose = "1.8.2"
 androidx-core = "1.12.0"
 androidx-lifecycle = "2.7.0"
@@ -33,6 +33,7 @@ androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-cor
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 slack-circuit-backstack = { module = "com.slack.circuit:circuit-backstack", version.ref = "slack-circuit" }
 slack-circuit-foundations = { module = "com.slack.circuit:circuit-foundation", version.ref = "slack-circuit" }

@@ -1,4 +1,4 @@
-package jt.flights.flightaware
+package jt.flights.networking.flightaware
 
 import okhttp3.Interceptor
 import okhttp3.Response

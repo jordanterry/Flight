@@ -22,10 +22,12 @@ class NetworkingModule {
 
     @Provides
     fun okHttpClient(
-//        interceptors: Set<Interceptor>
+        interceptors: Set<@JvmSuppressWildcards Interceptor>
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor())
+            .apply {
+                interceptors.forEach(this::addInterceptor)
+            }
             .build()
     }
 

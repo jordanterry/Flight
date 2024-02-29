@@ -102,7 +102,7 @@ class FlightAwareApiSearchDataSourceTest {
         assertEquals(404, data.errorCode)
     }
 
-    fun getFile(resource: String): String {
+    private fun getFile(resource: String): String {
         return this::class.java.classLoader.getResource(resource).readText()
     }
 

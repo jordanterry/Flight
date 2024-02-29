@@ -3,19 +3,19 @@ package jt.flights.model
 sealed interface Flight {
 
     data class OnTime(
-        val id: Flight.Id,
+        val id: Id,
     ) : Flight
 
     data class Delayed(
-        val id: Flight.Id,
+        val id: Id,
     ) : Flight
 
     data class Cancelled(
-        val id: Flight.Id,
+        val id: Id,
     ) : Flight
 
     data class Diverted(
-        val id: Flight.Id,
+        val id: Id,
     ) : Flight
 
     @JvmInline

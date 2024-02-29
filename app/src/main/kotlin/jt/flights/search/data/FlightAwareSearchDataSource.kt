@@ -4,8 +4,6 @@ import com.squareup.anvil.annotations.ContributesBinding
 import jt.flights.di.AppScope
 import jt.flights.model.Flight
 import jt.flights.networking.await
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl

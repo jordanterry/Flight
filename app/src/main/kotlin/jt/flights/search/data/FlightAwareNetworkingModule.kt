@@ -4,7 +4,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import jt.flights.di.AppScope
-import jt.flights.flightaware.FlightAwareApiInterceptor
+import jt.flights.networking.flightaware.FlightAwareApiInterceptor
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import javax.inject.Qualifier
