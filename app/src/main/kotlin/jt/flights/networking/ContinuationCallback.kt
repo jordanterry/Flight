@@ -1,4 +1,4 @@
-package jt.flights.search.data
+package jt.flights.networking
 
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CompletionHandler

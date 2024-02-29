@@ -26,7 +26,7 @@ class FlightActivity @Inject constructor(
         super.onCreate(savedInstanceState)
         setContent {
             CircuitCompositionLocals(circuit) {
-                val backstack = rememberSaveableBackStack { push(SearchScreen) }
+                val backstack = rememberSaveableBackStack(SearchScreen)
                 BackHandler(onBack = { /* do something on root */ })
                 val navigator = rememberCircuitNavigator(backstack)
                 NavigableCircuitContent(navigator, backstack)

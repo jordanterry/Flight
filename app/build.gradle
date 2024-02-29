@@ -50,6 +50,7 @@ dependencies {
     kapt(libs.dagger.compiler)
     implementation(libs.square.anvil.annotations)
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation(libs.square.okhttp.mockwebserver)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
     implementation(platform(libs.square.okhttp.platform))
