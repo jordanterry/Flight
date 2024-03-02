@@ -1,9 +1,13 @@
 package jt.flights.search.data
 
 import jt.flights.model.Flight
+import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {
-    suspend fun search(flightNumber: String): SearchResults
+
+    val results: Flow<SearchResults>
+
+    suspend fun search(flightNumber: String)
 
     sealed interface SearchResults {
         data class Found(

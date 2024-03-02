@@ -32,12 +32,18 @@ interface FlightAwareApi {
         val departureDelay: Int? = null,
         @SerialName("arrival_delay")
         val arrivalDelay: Int? = null,
+        @SerialName("progress_percent")
+        val progressPercent: Int = 0,
     )
 
     @Serializable
     data class Airport(
+        @SerialName("code")
         val code: String,
+        @SerialName("name")
         val name: String,
+        @SerialName("code_iata")
+        val iataCode: String,
     )
 
     @Serializable

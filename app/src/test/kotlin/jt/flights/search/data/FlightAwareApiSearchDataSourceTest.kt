@@ -3,8 +3,10 @@ package jt.flights.search.data
 import jt.flights.networking.NetworkingModule
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.SerializationException
+import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import java.security.InvalidParameterException
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -26,7 +28,7 @@ class FlightAwareApiSearchDataSourceTest {
         val networkingModule = NetworkingModule()
         val flightAwareNetworkingModule = FlightAwareNetworkingModule()
         val okHttpClient = flightAwareNetworkingModule
-            .provideFlightAwareOkHttpClient(networkingModule.okHttpClient())
+            .provideFlightAwareOkHttpClient(networkingModule.okHttpClient(emptySet()))
         flightAwareSearchDataSource = FlightAwareSearchDataSource(
             okHttpClient = okHttpClient,
             json = networkingModule.provideJson(),
@@ -59,7 +61,8 @@ class FlightAwareApiSearchDataSourceTest {
             MockResponse()
                 .setResponseCode(200)
         )
-        val result = flightAwareSearchDataSource.search("1234")
+        flightAwareSearchDataSource
+            .search("1234")
         assertNotNull(
             mockWebServer.takeRequest()
                 .getHeader("x-apikey")
@@ -103,7 +106,7 @@ class FlightAwareApiSearchDataSourceTest {
     }
 
     private fun getFile(resource: String): String {
-        return this::class.java.classLoader.getResource(resource).readText()
+        return this::class.java.classLoader?.getResource(resource)?.readText() ?: throw InvalidParameterException("No file found")
     }
 
 }

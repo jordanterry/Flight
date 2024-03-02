@@ -76,15 +76,28 @@ class FlightAwareSearchDataSource @Inject constructor(
     }
 
     private fun FlightAwareApi.Flight.toFlight(): Flight {
-        return if (departureDelay != null || arrivalDelay != null) {
-            Flight.Delayed(Flight.Id(ident))
-        } else if (cancelled) {
-            Flight.Cancelled(Flight.Id(ident))
-        } else if (diverted) {
-            Flight.Diverted(Flight.Id(ident))
-        } else {
-            Flight.OnTime(Flight.Id(ident))
-        }
+//        val flightInfo = if ((departureDelay != null && departureDelay > 10) || (arrivalDelay != null && arrivalDelay > 10)) {
+//            Flight.Info.Delayed
+//        } else if (cancelled) {
+//            Flight.Info.Cancelled
+//        } else if (diverted) {
+//            Flight.Info.Diverted
+//        } else {
+//            Flight.Info.OnTime
+//        }
+        return Flight(
+            id = Flight.Id(ident),
+            from = Flight.Airport(
+                name = origin.name,
+                iataCode = origin.iataCode,
+            ),
+            to = Flight.Airport(
+                name = destination.name,
+                iataCode = destination.iataCode,
+            ),
+            isActive = progressPercent in 1..99,
+            flightInfo = Flight.Info.OnTime,
+        )
     }
 }
 
