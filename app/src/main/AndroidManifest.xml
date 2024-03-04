@@ -14,7 +14,7 @@
         android:name=".FlightApplication"
         tools:replace="appComponentFactory">
         <activity
-            android:name=".FlightActivity"
+            android:name=".VmActivity"
             android:label="Flight"
             android:exported="true">
             <intent-filter>

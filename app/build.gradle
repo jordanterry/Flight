@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.square.okhttp.logging.interceptor)
     implementation(libs.kotlinx.coroutines)
     testImplementation("app.cash.turbine:turbine:1.0.0")
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.manifest)

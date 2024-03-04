@@ -92,8 +92,8 @@ class FlightAwareApiSearchRepositoryTest {
                 FlightAwareSearchDataSource.FlightAwareSearchResult.Results(listOf(
                     Flight(
                         id = Flight.Id("1234"),
-                        from = Flight.Airport("LHR"),
-                        to = Flight.Airport("LCY"),
+                        from = Flight.Airport("LHR", "lhr"),
+                        to = Flight.Airport("LCY", "lcy"),
                         isActive = true,
                         flightInfo = Flight.Info.Delayed,
                     )
