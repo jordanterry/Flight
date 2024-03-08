@@ -1,5 +1,7 @@
 [versions]
+agent-gradle-plugin = "7.3.0"
 agp = "8.2.2"
+android-agent = "7.2.0"
 androidx-activity = "1.8.2"
 androidx-appcompat = "1.6.1"
 androidx-compose-bom = "2024.02.01"
@@ -13,11 +15,17 @@ kotlin = "1.9.22"
 kotlin-ksp = "1.9.22-1.0.17"
 compose-compiler = "1.5.10"
 dagger = "2.50"
+kotlinx-coroutines-test = "1.8.0"
+kotlinx-datetime = "0.2.0"
+kotlinx-serialization-json = "1.6.3"
 slack-circuit = "0.19.1"
 square-anvil = "2.4.9"
 square-okhttp = "4.12.0"
+turbine = "1.0.0"
 
 [libraries]
+agent-gradle-plugin = { module = "com.newrelic.agent.android:agent-gradle-plugin", version.ref = "agent-gradle-plugin" }
+android-agent = { module = "com.newrelic.agent.android:android-agent", version.ref = "android-agent" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity"}
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
@@ -35,6 +43,9 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 slack-circuit-backstack = { module = "com.slack.circuit:circuit-backstack", version.ref = "slack-circuit" }
 slack-circuit-foundations = { module = "com.slack.circuit:circuit-foundation", version.ref = "slack-circuit" }
 slack-circuit-runtime-presenter = { module = "com.slack.circuit:circuit-runtime-presenter", version.ref = "slack-circuit" }
@@ -47,6 +58,7 @@ square-okhttp-platform = { module = "com.squareup.okhttp3:okhttp-bom", version.r
 square-okhttp = { module = "com.squareup.okhttp3:okhttp" }
 square-okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
 square-okhttp-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [bundles]
 slack-circuit = [
