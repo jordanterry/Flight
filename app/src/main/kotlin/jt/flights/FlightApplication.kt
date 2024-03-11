@@ -13,7 +13,7 @@ class FlightApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         NewRelic
-            .withApplicationToken("")
+            .withApplicationToken(BuildConfig.NEWRELIC_TOKEN)
             .start(this)
     }
 }

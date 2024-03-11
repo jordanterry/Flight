@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.square.anvil)
@@ -10,58 +9,56 @@ plugins {
 }
 
 android {
+
+    buildFeatures {
+        buildConfig = true
+        compose = true
+    }
+
     namespace = "jt.flights"
     compileSdk = 34
-    defaultConfig {
-        minSdk = 28
-    }
 
     kotlin {
         jvmToolchain(JavaLanguageVersion.of(17).asInt())
     }
 
-
-    buildFeatures {
-        compose = true
-    }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
+
     defaultConfig {
         applicationId = "jt.flights"
         versionCode = 1
         versionName = "1.0"
-
+        minSdk = 28
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "NEWRELIC_TOKEN", "\"" + property("flight.newrelic.token") + "\"")
     }
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
+    implementation(projects.foundation.di)
+    implementation(projects.foundation.models)
+    implementation(projects.foundation.circuit)
+    implementation(projects.foundation.compose)
+    implementation(projects.foundation.networking)
+    implementation(projects.features.search)
+
     implementation(libs.androidx.compose.activity)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.viewmodel)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.bundles.slack.circuit)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
     implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
     implementation(libs.square.anvil.annotations)
-    testImplementation libs.kotlin.test
-    testImplementation(libs.square.okhttp.mockwebserver)
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.datetime)
-    implementation(platform(libs.square.okhttp.platform))
-    implementation(libs.square.okhttp)
-    implementation(libs.square.okhttp.logging.interceptor)
-    implementation(libs.kotlinx.coroutines)
-    testImplementation(libs.turbine)
-    implementation libs.androidx.viewmodel
-    testImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.manifest)
     implementation(libs.android.agent)
+
+    kapt(libs.dagger.compiler)
+
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    debugImplementation(libs.androidx.compose.ui.manifest)
 }
