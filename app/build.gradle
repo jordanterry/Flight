@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.square.anvil)
-    id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.22'
-    id 'newrelic'
+    alias(libs.plugins.kotlinx.serialization)
+    id("newrelic")
 }
 
 android {

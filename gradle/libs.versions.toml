@@ -1,14 +1,11 @@
 [versions]
-agent-gradle-plugin = "7.3.0"
-agp = "8.3.0"
+newrelic-agent = "7.3.0"
+agp = "8.2.2"
 android-agent = "7.2.0"
-androidx-activity = "1.8.2"
 androidx-appcompat = "1.6.1"
-androidx-compose-bom = "2024.02.01"
-androidx-compose = "1.6.2"
+androidx-compose-bom = "2024.02.02"
+androidx-compose = "1.6.3"
 androidx-activity-compose = "1.8.2"
-androidx-core = "1.12.0"
-androidx-lifecycle = "2.7.0"
 google-material = "1.11.0"
 kotlinx-coroutines = "1.8.0"
 kotlin = "1.9.22"
@@ -24,20 +21,17 @@ square-okhttp = "4.12.0"
 turbine = "1.0.0"
 
 [libraries]
-agent-gradle-plugin = { module = "com.newrelic.agent.android:agent-gradle-plugin", version.ref = "agent-gradle-plugin" }
+agent-gradle-plugin = { module = "com.newrelic.agent.android:agent-gradle-plugin", version.ref = "newrelic-agent" }
 android-agent = { module = "com.newrelic.agent.android:android-agent", version.ref = "android-agent" }
-androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity"}
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 androidx-compose-material = { module = "androidx.compose.material3:material3" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-compose" }
 androidx-compose-ui-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
-androidx-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
@@ -67,7 +61,8 @@ slack-circuit = [
     "slack-circuit-foundations",
     "slack-circuit-runtime",
     "slack-circuit-runtime-presenter",
-    "slack-circuit-runtime-ui"
+    "slack-circuit-runtime-ui",
+    "slack-circuit-codegen"
 ]
 
 [plugins]
@@ -78,4 +73,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "kotlin-ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 square-anvil = { id = "com.squareup.anvil", version.ref = "square-anvil" }
