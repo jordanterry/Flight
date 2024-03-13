@@ -1,5 +1,6 @@
 package jt.flights.search.data.flightaware
 
+import com.newrelic.agent.android.NewRelic
 import com.squareup.anvil.annotations.ContributesBinding
 import jt.flights.di.AppScope
 import jt.flights.networking.await
@@ -54,10 +55,12 @@ class FlightAwareSearchDataSource @Inject constructor(
                 }
             }
         } catch (ioException: IOException) {
+            NewRelic.recordHandledException(ioException)
             Result.failure(
                 exception = ioException
             )
         } catch (serializationException: SerializationException) {
+            NewRelic.recordHandledException(serializationException)
             Result.failure(
                 exception = serializationException
             )

@@ -27,10 +27,12 @@ android {
     }
 
     defaultConfig {
+        targetSdk = 34
         applicationId = "jt.flights"
         versionCode = 1
         versionName = "1.0"
         minSdk = 28
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "NEWRELIC_TOKEN", "\"" + property("flight.newrelic.token") + "\"")
     }

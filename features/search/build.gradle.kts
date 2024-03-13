@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.square.anvil)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -18,6 +19,7 @@ android {
     }
 
     defaultConfig {
+        minSdk = 28
         buildConfigField("String", "FLIGHTAWARE_TOKEN", "\"" + property("flight.flightaware.token") + "\"")
     }
 }
@@ -35,4 +37,7 @@ dependencies {
     implementation(projects.foundation.circuit)
     implementation(projects.foundation.models)
     implementation(projects.foundation.networking)
+    implementation(libs.android.agent)
+    debugImplementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
 }

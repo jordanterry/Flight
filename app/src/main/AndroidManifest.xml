@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Flights"
         android:name=".FlightApplication"
+
         tools:replace="appComponentFactory">
         <activity
             android:name=".FlightActivity"

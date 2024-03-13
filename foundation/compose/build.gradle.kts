@@ -23,6 +23,5 @@ dependencies {
     api(libs.androidx.compose.activity)
     api(libs.androidx.compose.foundation)
     api(libs.androidx.compose.ui)
-    api(libs.androidx.compose.ui.tooling.preview)
     api(libs.androidx.compose.material)
 }
