@@ -40,6 +40,7 @@ dependencies {
     implementation(projects.foundation.networking)
     implementation(libs.android.agent)
     ksp(libs.slack.circuit.codegen)
+    api(libs.kotlinx.datetime)
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
 }

@@ -1,31 +1,48 @@
 package jt.flights.search.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import jt.flights.model.Flight
-import java.util.Locale
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
+import kotlinx.datetime.toLocalDateTime
 
+@FormatStringsInDatetimeFormats
 @Composable
 fun FlightHeader(
     modifier: Modifier = Modifier,
     flight: Flight,
 ) {
+    val header = buildString {
+        append(flight.id.id.uppercase())
+        append(" ")
+        val fromInstant = flight.fromInstant
+        if (fromInstant != null) {
+            val localDateTime = fromInstant.toLocalDateTime(TimeZone.currentSystemDefault())
+            val format = localDateTime.format(LocalDateTime.Format {
+                byUnicodePattern("yyyy/MM/dd")
+            })
+
+//            val format = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(
+//                fromInstant.toJavaInstant()
+//            )
+            append(format)
+        }
+    }
     ListItem(headlineContent = {
         Text(
             fontWeight = FontWeight.Bold,
-            text = flight.id.id.uppercase(Locale.getDefault()),
+            text = header,
             modifier = Modifier
                 .padding(16.dp),
         )
@@ -48,7 +65,8 @@ fun HeaderPreview() {
         from = Flight.Airport("London Heathrow", "LHR"),
         to = Flight.Airport("Miami", "MIA"),
         isActive = true,
-        flightInfo = Flight.Info.Delayed
+        flightInfo = Flight.Info.Delayed,
+        fromInstant = Instant.parse("2024-02-24T22:15:00Z")
     )
     FlightHeader(flight = flight)
 }

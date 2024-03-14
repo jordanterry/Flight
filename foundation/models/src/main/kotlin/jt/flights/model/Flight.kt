@@ -1,9 +1,13 @@
 package jt.flights.model
 
+import kotlinx.datetime.Instant
+
 data class Flight(
     val id: Id,
     val from: Airport,
+    val fromInstant: Instant? = null,
     val to: Airport,
+    val toInstant: Instant? = null,
     val isActive: Boolean,
     val flightInfo: Info,
 ) {

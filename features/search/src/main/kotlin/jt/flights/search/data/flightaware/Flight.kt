@@ -1,5 +1,6 @@
 package jt.flights.search.data.flightaware
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,9 +15,14 @@ internal data class Flight(
     @SerialName("aircraft_type")
     val aircraftType: String,
     @SerialName("scheduled_off")
-    val scheduledOff: String,
+    val scheduledOff: Instant? = null,
     @SerialName("estimated_off")
-    val estimatedOff: String,
+    val estimatedOff: Instant? = null,
+    @SerialName("scheduled_in")
+    val scheduledIn: Instant? = null,
+    @SerialName("estimated_in")
+    val estimatedIn: Instant? = null,
+
     @SerialName("operator")
     val operator: String,
     @SerialName("operator_icao")

@@ -18,14 +18,17 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import jt.flights.di.AppScope
 import jt.flights.model.Flight
+import jt.flights.search.data.ArrivalsRepository
 import jt.flights.search.data.SearchRepository
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 
 class SearchPresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,
     private val searchRepository: SearchRepository,
+    private val arrivalsRepository: ArrivalsRepository,
 ) : Presenter<SearchScreen.UiState> {
     @Composable
     override fun present(): SearchScreen.UiState {
@@ -51,8 +54,15 @@ class SearchPresenter @AssistedInject constructor(
                 }
         }
         val flights = flightResults
+        val arrivalResult = runBlocking {
+            when (val result = arrivalsRepository.search("LHR")) {
+                is ArrivalsRepository.ArrivalResult.Found -> result.results
+                ArrivalsRepository.ArrivalResult.NotFound -> emptyList()
+            }
+        }
         return SearchScreen.UiState(
-            searchResults = flights
+            searchResults = flights,
+            latestArrivals = arrivalResult,
         ) { event ->
             when (event) {
                 is SearchScreen.Event.Search -> {

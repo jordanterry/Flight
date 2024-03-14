@@ -5,3 +5,7 @@ plugins {
 kotlin {
     jvmToolchain(JavaLanguageVersion.of(17).asInt())
 }
+
+dependencies {
+    api(libs.kotlinx.datetime)
+}

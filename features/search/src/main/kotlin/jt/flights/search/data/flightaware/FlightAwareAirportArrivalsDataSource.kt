@@ -4,7 +4,7 @@ import com.newrelic.agent.android.NewRelic
 import com.squareup.anvil.annotations.ContributesBinding
 import jt.flights.di.AppScope
 import jt.flights.networking.await
-import jt.flights.search.data.SearchDataSource
+import jt.flights.search.data.AirportArrivalsDataSource
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl
@@ -14,16 +14,18 @@ import okio.IOException
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
-class FlightAwareSearchDataSource @Inject constructor(
+class FlightAwareAirportArrivalsDataSource @Inject constructor(
     private val json: Json,
     @FlightAwareOkHttp private val okHttpClient: OkHttpClient,
     @FlightAwareBaseUrl private val httpUrl: HttpUrl,
-) : SearchDataSource {
-    override suspend fun search(flightNumber: String): Result<FlightAwareSearchResult> {
+) : AirportArrivalsDataSource {
+    override suspend fun search(icao: String): Result<FlightAwareSearchResult> {
         val searchUrl = httpUrl
             .newBuilder()
+            .addPathSegment("airports")
+            .addPathSegment(icao)
             .addPathSegment("flights")
-            .addPathSegment(flightNumber)
+            .addPathSegment("arrivals")
             .build()
         val request = Request.Builder()
             .url(searchUrl)
@@ -36,8 +38,8 @@ class FlightAwareSearchDataSource @Inject constructor(
                 if (response.isSuccessful) {
                     response.body?.use { responseBody ->
                         val flights = json
-                            .decodeFromString<FlightsResult>(responseBody.string())
-                            .flights
+                            .decodeFromString<ArrivalsResult>(responseBody.string())
+                            .arrivals
                             .map { flightAwareFlight -> flightAwareFlight.toFlight() }
                         Result.success(
                             value = FlightAwareSearchResult.Results(flights)

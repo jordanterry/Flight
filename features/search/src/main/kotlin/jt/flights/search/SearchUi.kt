@@ -1,6 +1,7 @@
 package jt.flights.search
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -59,7 +62,7 @@ class SearchUi : Ui<SearchScreen.UiState> {
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @CircuitInject(SearchScreen::class, AppScope::class)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun Search(
     state: SearchScreen.UiState,
@@ -105,6 +108,16 @@ fun Search(
             ) {
                 items(state.searchResults) { flight ->
                     FlightCard(flight)
+                }
+            }
+
+            val pagerState = rememberPagerState {
+                state.latestArrivals.count()
+            }
+            HorizontalPager(state = pagerState) { page ->
+                val flight = state.latestArrivals.getOrNull(page)
+                if (flight != null) {
+                    FlightCard(flight = flight)
                 }
             }
         }
