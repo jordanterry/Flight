@@ -1,4 +1,4 @@
-package jt.flights.search
+package jt.flights.search.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,25 +32,28 @@ import jt.flights.model.Flight
 import java.util.Locale
 
 fun Flight.Info.toCardColors(): CardColors {
-    return when(this) {
+    return when (this) {
         Flight.Info.Cancelled -> CardColors(
             contentColor = Color.Black,
             containerColor = Color.Red,
             disabledContentColor = Color.Black,
             disabledContainerColor = Color.Red,
         )
+
         Flight.Info.Delayed -> CardColors(
             contentColor = Color.Black,
             containerColor = Color.Yellow,
             disabledContentColor = Color.Black,
             disabledContainerColor = Color.Yellow,
         )
+
         Flight.Info.Diverted -> CardColors(
             contentColor = Color.Black,
             containerColor = Color.Magenta,
             disabledContentColor = Color.Black,
             disabledContainerColor = Color.Magenta,
         )
+
         Flight.Info.OnTime -> CardColors(
             contentColor = Color.Black,
             containerColor = Color.LightGray,
@@ -75,8 +78,7 @@ fun FlightCard(
     flight: Flight,
 ) {
     Box(
-        modifier = Modifier
-            .padding(8.dp),
+        modifier = Modifier,
     ) {
         Card(
             modifier = Modifier
@@ -87,46 +89,19 @@ fun FlightCard(
                 defaultElevation = 6.dp
             ),
         ) {
-            ListItem(headlineContent = {
-                Text(
-                    fontWeight = FontWeight.Bold,
-                    text = flight.id.id.uppercase(Locale.getDefault()),
-                    modifier = Modifier
-                        .padding(16.dp),
-                )
-            },
-                supportingContent = {
-
-                },
-                trailingContent = {
-                    FlightInfo(
-                        flightInfo = flight.flightInfo
-                    )
-                })
-
+            FlightHeader(flight = flight)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp)
             ) {
-
-                Box(
+                StackedAirportInfo(
                     modifier = Modifier
                         .fillMaxHeight()
                         .fillMaxWidth()
                         .weight(1.0f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column {
-                        Text(
-                            fontSize = 48.sp,
-                            text = flight
-                                .from
-                                .iataCode.uppercase(Locale.getDefault())
-                        )
-                        Text(text = flight.from.name)
-                    }
-                }
+                    airport = flight.from
+                )
 
                 Box(
                     modifier = Modifier
@@ -138,23 +113,13 @@ fun FlightCard(
                     Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "")
                 }
 
-                Box(
+                StackedAirportInfo(
                     modifier = Modifier
                         .fillMaxHeight()
                         .fillMaxWidth()
                         .weight(1.0f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column {
-                        Text(
-                            fontSize = 48.sp,
-                            text = flight
-                                .to
-                                .iataCode.uppercase(Locale.getDefault())
-                        )
-                        Text(text = flight.to.name)
-                    }
-                }
+                    airport = flight.to
+                )
             }
         }
     }
@@ -165,8 +130,8 @@ fun FlightCard(
 fun Vir5cPreview() {
     val flight = Flight(
         id = Flight.Id("Vir5c"),
-        from = Flight.Airport("London Heathrow","LHR"),
-        to = Flight.Airport("Miami","MIA"),
+        from = Flight.Airport("London Heathrow", "LHR"),
+        to = Flight.Airport("Miami", "MIA"),
         isActive = true,
         flightInfo = Flight.Info.Delayed
     )

@@ -1,30 +1,50 @@
 package jt.flights.search
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DockedSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.isContainer
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.screen.Screen
 import com.slack.circuit.runtime.ui.Ui
 import com.squareup.anvil.annotations.ContributesMultibinding
 import jt.flights.di.AppScope
+import jt.flights.search.SearchScreen
+import jt.flights.search.ui.FlightCard
 import javax.inject.Inject
 
 class SearchUi : Ui<SearchScreen.UiState> {
@@ -37,68 +57,56 @@ class SearchUi : Ui<SearchScreen.UiState> {
     }
 }
 
-@ContributesMultibinding(AppScope::class, Ui.Factory::class)
-class SearchUiFactory @Inject constructor() : Ui.Factory {
-    override fun create(screen: Screen, context: CircuitContext): Ui<*>? {
-        return when (screen) {
-            is SearchScreen -> SearchUi()
-            else -> null
-        }
-    }
-}
-
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@CircuitInject(SearchScreen::class, AppScope::class)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Search(state: SearchScreen.UiState, modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        Row {
-            var text by remember { mutableStateOf("") }
-
-            SearchBar(
-                trailingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_airplane_ticket_24),
-                        contentDescription = null // decorative element
-                    )
-                },
-                placeholder = {
-                    Text(text = "What's your flight number?")
-                },
-                query = text,
-                onQueryChange = { query ->
-                    text = query
-                },
-                onSearch = {
-                    state.eventSink(
-                        SearchScreen.Event.Search(text)
-                    )
-                },
-                active = true, onActiveChange = {}) {
-
-                LazyColumn {
-                    items(state.searchResults) { flight ->
-                        FlightCard(flight)
-                    }
-                }
-
+fun Search(
+    state: SearchScreen.UiState,
+    modifier: Modifier = Modifier
+) {
+    Scaffold(
+        modifier = modifier,
+    ) {
+        var text by remember { mutableStateOf("") }
+        var isActive by remember { mutableStateOf(false) }
+        Column(Modifier.fillMaxSize()) {
+            Box(
+                Modifier
+                    .semantics { isTraversalGroup = true }
+                    .zIndex(1f)
+                    .fillMaxWidth()) {
+                SearchBar(
+                    modifier = Modifier
+                        .align(Alignment.TopCenter),
+                    trailingIcon = {
+                       Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
+                    },
+                    placeholder = {
+                        Text(text = "What's your flight number?")
+                    },
+                    query = text,
+                    onQueryChange = { query ->
+                        text = query.uppercase()
+                    },
+                    onSearch = {
+                        state.eventSink(
+                            SearchScreen.Event.Search(text)
+                        )
+                        isActive = false
+                    },
+                    active = isActive,
+                    onActiveChange = { isActive = it }
+                ) { }
             }
-            TextField(
-                value = text,
-                singleLine = true,
-                onValueChange = { newText -> text = newText },
-                label = { Text("Enter text") },
-                keyboardActions = KeyboardActions(onAny = { state.eventSink(
-                    SearchScreen.Event.Search(text)
-                ) })
-            )
-            Button(onClick = {
-                state.eventSink(
-                    SearchScreen.Event.Search(text)
-                )
-            }) {
-                Text(text = "Search")
+            LazyColumn(
+                modifier = Modifier
+                    .padding(18.dp)
+            ) {
+                items(state.searchResults) { flight ->
+                    FlightCard(flight)
+                }
             }
         }
-
     }
 }

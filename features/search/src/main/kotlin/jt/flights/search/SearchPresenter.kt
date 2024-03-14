@@ -7,18 +7,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import com.slack.circuit.codegen.annotations.CircuitInject
 import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
 import com.squareup.anvil.annotations.ContributesMultibinding
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import jt.flights.di.AppScope
+import jt.flights.model.Flight
 import jt.flights.search.data.SearchRepository
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class SearchPresenter(
-    private val navigator: Navigator,
+
+class SearchPresenter @AssistedInject constructor(
+    @Assisted private val navigator: Navigator,
     private val searchRepository: SearchRepository,
 ) : Presenter<SearchScreen.UiState> {
     @Composable
@@ -30,8 +36,8 @@ class SearchPresenter(
                 flightNumber = null
             }
         }
-        
-        val flightResults by produceState<List<jt.flights.model.Flight>>(initialValue = emptyList()) {
+
+        val flightResults by produceState<List<Flight>>(initialValue = emptyList()) {
             searchRepository
                 .results
                 .map {  flights ->
@@ -55,16 +61,9 @@ class SearchPresenter(
             }
         }
     }
-}
-
-@ContributesMultibinding(AppScope::class, Presenter.Factory::class)
-class SearchPresenterFactory @Inject constructor(
-    private val searchRepository: SearchRepository
-) : Presenter.Factory {
-    override fun create(screen: Screen, navigator: Navigator, context: CircuitContext): Presenter<*>? {
-        return when (screen) {
-            is SearchScreen -> SearchPresenter(navigator, searchRepository)
-            else -> null
-        }
+    @CircuitInject(SearchScreen::class, AppScope::class)
+    @AssistedFactory
+    fun interface Factory {
+        fun create(navigator: Navigator): SearchPresenter
     }
 }

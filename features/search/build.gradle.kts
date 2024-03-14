@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.square.anvil)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -38,6 +39,7 @@ dependencies {
     implementation(projects.foundation.models)
     implementation(projects.foundation.networking)
     implementation(libs.android.agent)
+    ksp(libs.slack.circuit.codegen)
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.ui.tooling)
 }
