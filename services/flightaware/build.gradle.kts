@@ -1,25 +1,25 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.square.anvil)
-    alias(libs.plugins.kotlinx.serialization)
-    id("com.github.gmazzo.buildconfig") version "5.3.5"
+	alias(libs.plugins.kotlin.jvm)
+	alias(libs.plugins.square.anvil)
+	alias(libs.plugins.kotlinx.serialization)
+	id("com.github.gmazzo.buildconfig") version "5.3.5"
 }
 
 anvil {
-    generateDaggerFactories = true
+	generateDaggerFactories = true
 }
 
 kotlin {
-    jvmToolchain(JavaLanguageVersion.of(17).asInt())
+	jvmToolchain(JavaLanguageVersion.of(17).asInt())
 }
 
 buildConfig {
-    buildConfigField("FLIGHTAWARE_TOKEN", property("flight.flightaware.token")?.toString())
+	buildConfigField("FLIGHTAWARE_TOKEN", property("flight.flightaware.token")?.toString())
 }
 
 dependencies {
-    api(projects.foundation.di)
-    api(projects.foundation.networking)
-    api(libs.kotlinx.datetime)
-    implementation(project(":foundation:models"))
+	api(projects.foundation.di)
+	api(projects.foundation.networking)
+	api(projects.foundation.models)
+	api(libs.kotlinx.datetime)
 }

@@ -14,32 +14,34 @@ import javax.inject.Qualifier
 @ContributesTo(AppScope::class)
 class FlightAwareNetworkingModule {
 
-    @Provides
-    @FlightAwareBaseUrl
-    fun provideFlightAwareBaseUrl(): HttpUrl {
-        return HttpUrl.Builder()
-            .scheme("https")
-            .host("aeroapi.flightaware.com")
-            .addPathSegment("aeroapi")
-            .build()
-    }
+	@Provides
+	@FlightAwareBaseUrl
+	fun provideFlightAwareBaseUrl(): HttpUrl {
+		return HttpUrl.Builder()
+			.scheme("https")
+			.host("aeroapi.flightaware.com")
+			.addPathSegment("aeroapi")
+			.build()
+	}
 
-    @Provides
-    @FlightAwareOkHttp
-    fun provideFlightAwareOkHttpClient(
-        okHttpClient: OkHttpClient
-    ): OkHttpClient {
-        return okHttpClient
-            .newBuilder()
-            .addInterceptor(FlightAwareApiInterceptor(
-                token = BuildConfig.FLIGHTAWARE_TOKEN,
-            ))
-            .build()
-    }
+	@Provides
+	@FlightAwareOkHttp
+	fun provideFlightAwareOkHttpClient(
+		okHttpClient: OkHttpClient
+	): OkHttpClient {
+		return okHttpClient
+			.newBuilder()
+			.addInterceptor(
+				FlightAwareApiInterceptor(
+					token = BuildConfig.FLIGHTAWARE_TOKEN,
+				)
+			)
+			.build()
+	}
 }
 
 @Qualifier
-public annotation class FlightAwareBaseUrl
+annotation class FlightAwareBaseUrl
 
 @Qualifier
-public annotation class FlightAwareOkHttp
+annotation class FlightAwareOkHttp

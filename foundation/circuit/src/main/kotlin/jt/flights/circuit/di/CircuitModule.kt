@@ -10,24 +10,26 @@ import dagger.multibindings.Multibinds
 import jt.flights.di.AppScope
 
 @ContributesTo(
-    scope = AppScope::class
+	scope = AppScope::class
 )
 @Module
 interface CircuitModule {
-    @Multibinds fun presenterFactories(): Set<Presenter.Factory>
+	@Multibinds
+	fun presenterFactories(): Set<Presenter.Factory>
 
-    @Multibinds fun viewFactories(): Set<Ui.Factory>
+	@Multibinds
+	fun viewFactories(): Set<Ui.Factory>
 
-    companion object {
-        @Provides
-        fun provideCircuit(
-            presenterFactories: @JvmSuppressWildcards Set<Presenter.Factory>,
-            uiFactories: @JvmSuppressWildcards Set<Ui.Factory>,
-        ): Circuit {
-            return Circuit.Builder()
-                .addPresenterFactories(presenterFactories)
-                .addUiFactories(uiFactories)
-                .build()
-        }
-    }
+	companion object {
+		@Provides
+		fun provideCircuit(
+			presenterFactories: @JvmSuppressWildcards Set<Presenter.Factory>,
+			uiFactories: @JvmSuppressWildcards Set<Ui.Factory>,
+		): Circuit {
+			return Circuit.Builder()
+				.addPresenterFactories(presenterFactories)
+				.addUiFactories(uiFactories)
+				.build()
+		}
+	}
 }

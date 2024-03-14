@@ -1,12 +1,12 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
+	alias(libs.plugins.kotlin.jvm)
 }
 
 kotlin {
-    jvmToolchain(JavaLanguageVersion.of(17).asInt())
+	jvmToolchain(JavaLanguageVersion.of(17).asInt())
 }
 
 dependencies {
-    api(libs.dagger)
-    api(libs.square.anvil.annotations)
+	api(libs.dagger)
+	api(libs.square.anvil.annotations)
 }

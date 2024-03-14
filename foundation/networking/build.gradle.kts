@@ -1,22 +1,24 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.square.anvil)
+	alias(libs.plugins.kotlin.jvm)
+	alias(libs.plugins.square.anvil)
 }
 
 anvil {
-    generateDaggerFactories = true
+	generateDaggerFactories = true
 }
 
 kotlin {
-    jvmToolchain(JavaLanguageVersion.of(17).asInt())
+	jvmToolchain(JavaLanguageVersion.of(17).asInt())
 }
 
 dependencies {
-    api(projects.foundation.di)
-    api(platform(libs.square.okhttp.platform))
-    api(libs.square.okhttp)
-    api(libs.square.okhttp.logging.interceptor)
-    api(libs.kotlinx.coroutines)
-    api(libs.kotlinx.serialization.json)
-    testImplementation(libs.square.okhttp.mockwebserver)
+	api(projects.foundation.di)
+	api(projects.foundation.models)
+	api(platform(libs.square.okhttp.platform))
+	api(libs.square.okhttp)
+	api(libs.square.okhttp.logging.interceptor)
+	api(libs.kotlinx.coroutines)
+	api(libs.kotlinx.serialization.json)
+	implementation(libs.android.agent)
+	testImplementation(libs.square.okhttp.mockwebserver)
 }

@@ -17,57 +17,50 @@ import jt.flights.arrivals.ArrivalsRepository
 import jt.flights.di.AppScope
 import jt.flights.model.Flight
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 
 class SearchPresenter @AssistedInject constructor(
-    @Assisted private val navigator: Navigator,
-    private val searchRepository: SearchRepository,
-    private val arrivalsRepository: ArrivalsRepository,
+	@Assisted private val navigator: Navigator,
+	private val searchRepository: SearchRepository,
+	private val arrivalsRepository: ArrivalsRepository,
 ) : Presenter<SearchScreen.UiState> {
-    @Composable
-    override fun present(): SearchScreen.UiState {
-        var flightNumber by rememberSaveable { mutableStateOf<String?>(null) }
-        if (flightNumber != null) {
-            LaunchedEffect(Unit) {
-                searchRepository.search(flightNumber = flightNumber!!)
-                flightNumber = null
-            }
-        }
+	@Composable
+	override fun present(): SearchScreen.UiState {
+		var flightNumber by rememberSaveable { mutableStateOf<String?>(null) }
+		if (flightNumber != null) {
+			LaunchedEffect(Unit) {
+				searchRepository.search(flightNumber = flightNumber!!)
+				flightNumber = null
+			}
+		}
 
-        val flightResults by produceState<List<Flight>>(initialValue = emptyList()) {
-            searchRepository
-                .results
-                .map {  flights ->
-                    when (flights) {
-                        is SearchRepository.SearchResults.Found -> flights.results.filter { it.isActive }
-                        SearchRepository.SearchResults.NotFound -> emptyList()
-                    }
-                }
-                .collect {
-                    value = it
-                }
-        }
-        val flights = flightResults
-        val arrivalResult = runBlocking {
-            when (val result = arrivalsRepository.search("LHR")) {
-                is ArrivalsRepository.ArrivalResult.Found -> result.results
-                ArrivalsRepository.ArrivalResult.NotFound -> emptyList()
-            }
-        }
-        return SearchScreen.UiState(
-            searchResults = flights,
-            latestArrivals = arrivalResult,
-        ) { event ->
-            when (event) {
-                is SearchScreen.Event.Search -> {
-                    flightNumber = event.query
-                }
-            }
-        }
-    }
-    @CircuitInject(SearchScreen::class, AppScope::class)
-    @AssistedFactory
-    fun interface Factory {
-        fun create(navigator: Navigator): SearchPresenter
-    }
+		val flightResults by produceState<List<Flight>>(initialValue = emptyList()) {
+			searchRepository
+				.results
+				.map { flights ->
+					when (flights) {
+						is SearchRepository.SearchResults.Found -> flights.results.filter { it.isActive }
+						SearchRepository.SearchResults.NotFound -> emptyList()
+					}
+				}
+				.collect {
+					value = it
+				}
+		}
+		val flights = flightResults
+		return SearchScreen.UiState(
+			searchResults = flights,
+		) { event ->
+			when (event) {
+				is SearchScreen.Event.Search -> {
+					flightNumber = event.query
+				}
+			}
+		}
+	}
+
+	@CircuitInject(SearchScreen::class, AppScope::class)
+	@AssistedFactory
+	fun interface Factory {
+		fun create(navigator: Navigator): SearchPresenter
+	}
 }

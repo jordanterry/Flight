@@ -8,15 +8,14 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data object SearchScreen : Screen {
-    data class UiState(
-        val searchResults: List<Flight>,
-        val latestArrivals: List<Flight>,
-        val eventSink: (Event) -> Unit,
-    ) : CircuitUiState
+	data class UiState(
+		val searchResults: List<Flight>,
+		val eventSink: (Event) -> Unit,
+	) : CircuitUiState
 
-    sealed interface Event : CircuitUiEvent {
-        data class Search(
-            val query: String,
-        ) : Event
-    }
+	sealed interface Event : CircuitUiEvent {
+		data class Search(
+			val query: String,
+		) : Event
+	}
 }

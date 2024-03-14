@@ -14,27 +14,28 @@ import jt.flights.model.Flight
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FlightsCarousel(
-    carouselTitle: String,
-    flights: List<Flight>,
-    modifier: Modifier = Modifier,
+	carouselTitle: String,
+	flights: List<Flight>,
+	modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            text = carouselTitle)
-        val pagerState = rememberPagerState { flights.size }
-        HorizontalPager(
-            state = pagerState,
-        ) { page ->
-            val flight = flights.getOrNull(page)
-            if (flight != null) {
-                FlightCard(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    flight = flight,
-                )
-            }
-        }
-    }
+	Column(
+		modifier = modifier
+	) {
+		Text(
+			modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+			text = carouselTitle
+		)
+		val pagerState = rememberPagerState { flights.size }
+		HorizontalPager(
+			state = pagerState,
+		) { page ->
+			val flight = flights.getOrNull(page)
+			if (flight != null) {
+				FlightCard(
+					modifier = Modifier.padding(horizontal = 16.dp),
+					flight = flight,
+				)
+			}
+		}
+	}
 }

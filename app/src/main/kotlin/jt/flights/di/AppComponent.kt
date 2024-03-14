@@ -9,20 +9,20 @@ import javax.inject.Provider
 
 @SingleIn(AppScope::class)
 @MergeComponent(
-    AppScope::class,
-    modules = [
-        ActivityModule::class,
-    ]
+	AppScope::class,
+	modules = [
+		ActivityModule::class,
+	]
 )
 interface AppComponent {
-    val activityProviders: Map<Class<out Activity>, Provider<Activity>>
+	val activityProviders: Map<Class<out Activity>, Provider<Activity>>
 
-    @Component.Factory
-    interface Factory {
-        fun create(@ApplicationContext @BindsInstance context: Context): AppComponent
-    }
+	@Component.Factory
+	interface Factory {
+		fun create(@ApplicationContext @BindsInstance context: Context): AppComponent
+	}
 
-    companion object {
-        fun create(context: Context): AppComponent = DaggerAppComponent.factory().create(context)
-    }
+	companion object {
+		fun create(context: Context): AppComponent = DaggerAppComponent.factory().create(context)
+	}
 }

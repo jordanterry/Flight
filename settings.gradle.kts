@@ -1,19 +1,19 @@
 @file:Suppress("UnstableApiUsage")
 
 pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-        google()
-    }
+	repositories {
+		mavenCentral()
+		gradlePluginPortal()
+		google()
+	}
 }
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		google()
+		mavenCentral()
+	}
 }
 rootProject.name = "Flights"
 
@@ -27,3 +27,4 @@ include(":features:search")
 include(":services:flightaware")
 include(":services:search")
 include(":services:arrivals")
+include(":services:operator")

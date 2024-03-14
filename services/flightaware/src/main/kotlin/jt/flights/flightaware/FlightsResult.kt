@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FlightsResult(
-    @SerialName("flights")
-    val flightAwareFlights: List<FlightAwareFlight>
+	@SerialName("flights")
+	val flightAwareFlights: List<FlightAwareFlight>
 )

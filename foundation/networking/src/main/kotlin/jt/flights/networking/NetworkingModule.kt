@@ -6,7 +6,6 @@ import dagger.Provides
 import dagger.multibindings.IntoSet
 import jt.flights.di.AppScope
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,29 +14,29 @@ import okhttp3.logging.HttpLoggingInterceptor
 @ContributesTo(AppScope::class)
 class NetworkingModule {
 
-    @Provides
-    @IntoSet
-    fun httpLoggingInterceptor(): Interceptor {
-        return HttpLoggingInterceptor()
-    }
+	@Provides
+	@IntoSet
+	fun httpLoggingInterceptor(): Interceptor {
+		return HttpLoggingInterceptor()
+	}
 
-    @Provides
-    fun okHttpClient(
-        interceptors: Set<@JvmSuppressWildcards Interceptor>
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .apply {
-                interceptors.forEach(this::addInterceptor)
-            }
-            .build()
-    }
+	@Provides
+	fun okHttpClient(
+		interceptors: Set<@JvmSuppressWildcards Interceptor>,
+	): OkHttpClient {
+		return OkHttpClient.Builder()
+			.apply {
+				interceptors.forEach(this::addInterceptor)
+			}
+			.build()
+	}
 
-    @Provides
-    fun provideJson(): Json {
-        return Json {
-            ignoreUnknownKeys = true
-        }
-    }
+	@Provides
+	fun provideJson(): Json {
+		return Json {
+			ignoreUnknownKeys = true
+		}
+	}
 }
 
 
