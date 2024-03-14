@@ -1,9 +1,8 @@
-package jt.flights.search.data.flightaware
+package jt.flights.search
 
 import com.squareup.anvil.annotations.ContributesBinding
 import jt.flights.di.AppScope
-import jt.flights.search.data.SearchDataSource
-import jt.flights.search.data.SearchRepository
+import jt.flights.flightaware.FlightAwareSearchResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow

@@ -1,11 +1,11 @@
-package jt.flights.search.data.flightaware
+package jt.flights.flightaware
 
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class Flight(
+data class FlightAwareFlight(
     @SerialName("ident")
     val ident: String,
     @SerialName("origin")

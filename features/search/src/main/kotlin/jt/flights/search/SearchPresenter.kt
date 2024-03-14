@@ -8,22 +8,16 @@ import androidx.compose.runtime.produceState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import com.slack.circuit.codegen.annotations.CircuitInject
-import com.slack.circuit.runtime.CircuitContext
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
-import com.slack.circuit.runtime.screen.Screen
-import com.squareup.anvil.annotations.ContributesMultibinding
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import jt.flights.arrivals.ArrivalsRepository
 import jt.flights.di.AppScope
 import jt.flights.model.Flight
-import jt.flights.search.data.ArrivalsRepository
-import jt.flights.search.data.SearchRepository
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
-
 
 class SearchPresenter @AssistedInject constructor(
     @Assisted private val navigator: Navigator,

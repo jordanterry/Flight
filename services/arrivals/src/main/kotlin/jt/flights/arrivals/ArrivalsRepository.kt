@@ -1,7 +1,7 @@
-package jt.flights.search.data
+package jt.flights.arrivals
 
+import jt.flights.flightaware.FlightAwareSearchResult
 import jt.flights.model.Flight
-import kotlinx.coroutines.flow.Flow
 
 interface ArrivalsRepository {
 
@@ -14,4 +14,8 @@ interface ArrivalsRepository {
 
         data object NotFound : ArrivalResult
     }
+}
+
+fun interface AirportArrivalsDataSource {
+    suspend fun search(icao: String): Result<FlightAwareSearchResult>
 }

@@ -1,11 +1,11 @@
-package jt.flights.search.data.flightaware
+package jt.flights.flightaware
 
+import Flights.services.flightaware.BuildConfig
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import jt.flights.di.AppScope
 import jt.flights.networking.flightaware.FlightAwareApiInterceptor
-import jt.flights.search.BuildConfig
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import javax.inject.Qualifier
@@ -39,7 +39,7 @@ class FlightAwareNetworkingModule {
 }
 
 @Qualifier
-annotation class FlightAwareBaseUrl
+public annotation class FlightAwareBaseUrl
 
 @Qualifier
-annotation class FlightAwareOkHttp
+public annotation class FlightAwareOkHttp

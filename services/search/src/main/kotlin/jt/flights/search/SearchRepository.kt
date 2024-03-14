@@ -1,5 +1,6 @@
-package jt.flights.search.data
+package jt.flights.search
 
+import jt.flights.flightaware.FlightAwareSearchResult
 import jt.flights.model.Flight
 import kotlinx.coroutines.flow.Flow
 
@@ -16,4 +17,8 @@ interface SearchRepository {
 
         data object NotFound : SearchResults
     }
+}
+
+fun interface SearchDataSource {
+    suspend fun search(flightNumber: String): Result<FlightAwareSearchResult>
 }

@@ -76,9 +76,10 @@ fun FlightInfo(flightInfo: Flight.Info) {
 @Composable
 fun FlightCard(
     flight: Flight,
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier,
+        modifier = modifier,
     ) {
         Card(
             modifier = Modifier

@@ -1,10 +1,10 @@
-package jt.flights.search.data.flightaware
+package jt.flights.flightaware
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class Airport(
+data class Airport(
     @SerialName("code")
     val code: String,
     @SerialName("name")

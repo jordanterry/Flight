@@ -1,8 +1,10 @@
-package jt.flights.search.data.flightaware
+package jt.flights.flightaware
+
+import jt.flights.model.Flight
 
 sealed interface FlightAwareSearchResult {
     data class Results(
-        val flights: List<jt.flights.model.Flight>,
+        val flights: List<Flight>,
     ): FlightAwareSearchResult
     data object NoResults : FlightAwareSearchResult
     data class ResultFailure(
