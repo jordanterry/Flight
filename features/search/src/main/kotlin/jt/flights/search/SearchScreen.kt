@@ -9,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data object SearchScreen : Screen {
 	data class UiState(
+		val loading: Boolean = true,
 		val searchResults: List<Flight>,
 		val eventSink: (Event) -> Unit,
 	) : CircuitUiState

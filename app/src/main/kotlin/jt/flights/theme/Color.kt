@@ -1,4 +1,4 @@
-package jt.flights
+package jt.flights.theme
 
 import androidx.compose.ui.graphics.Color
 
