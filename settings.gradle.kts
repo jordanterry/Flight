@@ -3,9 +3,9 @@
 pluginManagement {
 	includeBuild("gradle/conventions")
 	repositories {
+		google()
 		mavenCentral()
 		gradlePluginPortal()
-		google()
 	}
 }
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
@@ -24,6 +24,7 @@ include(":foundation:compose")
 include(":foundation:di")
 include(":foundation:models")
 include(":foundation:networking")
+include(":foundation:o11y")
 include(":features:search")
 include(":services:flightaware")
 include(":services:search")

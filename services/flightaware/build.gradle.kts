@@ -2,7 +2,7 @@ plugins {
 	id("jt.flights.jvm")
 	alias(libs.plugins.square.anvil)
 	alias(libs.plugins.kotlinx.serialization)
-	id("com.github.gmazzo.buildconfig") version "5.3.5"
+	alias(libs.plugins.gmazzo.buildconfig)
 }
 
 anvil {
@@ -10,7 +10,7 @@ anvil {
 }
 
 buildConfig {
-	buildConfigField("FLIGHTAWARE_TOKEN", property("flight.flightaware.token")?.toString())
+	buildConfigField("FLIGHTAWARE_TOKEN", property("flight.flightaware.token").toString())
 }
 
 dependencies {

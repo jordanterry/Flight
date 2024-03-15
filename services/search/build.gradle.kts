@@ -1,6 +1,11 @@
 plugins {
-	id("jt.flights.jvm")
+	id("jt.flights.android.library")
 	alias(libs.plugins.square.anvil)
+	alias(libs.plugins.kotlin.ksp)
+}
+
+android {
+	namespace = "jt.flights.service.search"
 }
 
 anvil {
@@ -15,4 +20,7 @@ dependencies {
 	implementation(projects.foundation.networking)
 	implementation(libs.kotlinx.coroutines)
 	implementation(libs.android.agent)
+	implementation(libs.androidx.room.runtime)
+//	implementation(libs.androidx.room.ktx)
+	ksp(libs.androidx.room.compiler)
 }

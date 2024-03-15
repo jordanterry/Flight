@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.square.anvil)
     alias(libs.plugins.kotlinx.serialization)
+    id("newrelic")
 }
 
 android {
@@ -24,7 +25,6 @@ android {
         versionName = "1.0"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "NEWRELIC_TOKEN", "\"" + property("flight.newrelic.token") + "\"")
     }
 }
 
@@ -34,6 +34,7 @@ dependencies {
     implementation(projects.foundation.circuit)
     implementation(projects.foundation.compose)
     implementation(projects.foundation.networking)
+    implementation(projects.foundation.o11y)
     implementation(projects.features.search)
 
     implementation(libs.androidx.compose.activity)
