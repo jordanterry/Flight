@@ -2,15 +2,15 @@ package jt.flights.model
 
 import kotlinx.datetime.Instant
 
-data class Operator(
+public data class Operator(
 	val id: Id,
 	val name: String,
 ) {
 	@JvmInline
-	value class Id(val value: String)
+	public value class Id(public val value: String)
 }
 
-data class Flight(
+public data class Flight(
 	val id: Id,
 	val from: Airport,
 	val fromInstant: Instant? = null,
@@ -20,17 +20,17 @@ data class Flight(
 	val flightInfo: Info,
 	val operator: Operator? = null,
 ) {
-	sealed interface Info {
-		data object OnTime : Info
-		data object Delayed : Info
-		data object Cancelled : Info
-		data object Diverted : Info
+	public sealed interface Info {
+		public data object OnTime : Info
+		public data object Delayed : Info
+		public data object Cancelled : Info
+		public data object Diverted : Info
 	}
 
 	@JvmInline
-	value class Id(val id: String)
+	public value class Id(public val id: String)
 
-	data class Airport(
+	public data class Airport(
 		val name: String,
 		val iataCode: String,
 	)

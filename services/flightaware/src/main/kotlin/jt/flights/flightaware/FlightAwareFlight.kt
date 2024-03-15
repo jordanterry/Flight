@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FlightAwareFlight(
+public data class FlightAwareFlight(
 	@SerialName("ident")
 	val ident: String,
 	@SerialName("origin")

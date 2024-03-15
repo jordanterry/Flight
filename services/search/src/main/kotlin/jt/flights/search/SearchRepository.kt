@@ -3,12 +3,12 @@ package jt.flights.search
 import jt.flights.model.Data
 import jt.flights.model.Flight
 
-interface SearchRepository {
+public interface SearchRepository {
 
-	suspend fun search(flightNumber: String): List<Flight>?
+	public suspend fun search(flightNumber: String): List<Flight>?
 
 }
 
-fun interface SearchDataSource {
-	suspend fun search(flightNumber: String): Data<List<Flight>>
+public fun interface SearchDataSource {
+	public suspend fun search(flightNumber: String): Data<List<Flight>>
 }

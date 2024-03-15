@@ -2,7 +2,7 @@ package jt.flights.flightaware
 
 import jt.flights.model.Flight
 
-fun FlightAwareFlight.toFlight(): Flight {
+public fun FlightAwareFlight.toFlight(): Flight {
 	val departureDelay = this.departureDelay
 	val arrivalDelay = this.arrivalDelay
 	val flightInfo =
@@ -27,7 +27,7 @@ fun FlightAwareFlight.toFlight(): Flight {
 			name = destination.name,
 			iataCode = destination.iataCode,
 		),
-		isActive = progressPercent in 1..99,
+		isActive = progressPercent in 0..99,
 		flightInfo = flightInfo,
 	)
 }

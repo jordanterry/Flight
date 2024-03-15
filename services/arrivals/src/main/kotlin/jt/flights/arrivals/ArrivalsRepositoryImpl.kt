@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
-class ArrivalsRepositoryImpl @Inject constructor(
+public class ArrivalsRepositoryImpl @Inject constructor(
 	private val airportArrivalsDataSource: AirportArrivalsDataSource,
 ) : ArrivalsRepository {
 	override suspend fun search(icao: String): List<Flight>? = withContext(Dispatchers.IO) {

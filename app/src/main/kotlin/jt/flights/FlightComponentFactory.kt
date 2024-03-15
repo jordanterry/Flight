@@ -6,7 +6,7 @@ import android.content.Intent
 import androidx.core.app.AppComponentFactory
 import javax.inject.Provider
 
-class FlightComponentFactory : AppComponentFactory() {
+public class FlightComponentFactory : AppComponentFactory() {
 
 	private inline fun <reified T> getInstance(
 		cl: ClassLoader,
@@ -33,7 +33,7 @@ class FlightComponentFactory : AppComponentFactory() {
 		return app
 	}
 
-	companion object {
+	public companion object {
 		private lateinit var activityProviders: Map<Class<out Activity>, Provider<Activity>>
 	}
 }

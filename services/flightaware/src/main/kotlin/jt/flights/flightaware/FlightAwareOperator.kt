@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FlightAwareOperator(
+public data class FlightAwareOperator(
 	@SerialName("icao")
 	val icao: String? = null,
 	@SerialName("iata")

@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Flight aware implementation of the [SearchRepository].
  */
 @ContributesBinding(AppScope::class)
-class SearchRepositoryImpl @Inject constructor(
+public class SearchRepositoryImpl @Inject constructor(
 	private val searchDataSource: SearchDataSource,
 ) : SearchRepository {
 	override suspend fun search(flightNumber: String): List<Flight>? {

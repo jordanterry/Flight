@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jt.flights.model.Flight
 
-fun Flight.Info.toCardColors(): CardColors {
+public fun Flight.Info.toCardColors(): CardColors {
 	return when (this) {
 		Flight.Info.Cancelled -> CardColors(
 			contentColor = Color.Black,
@@ -54,17 +54,7 @@ fun Flight.Info.toCardColors(): CardColors {
 }
 
 @Composable
-fun FlightInfo(flightInfo: Flight.Info) {
-	when (flightInfo) {
-		Flight.Info.Cancelled -> CancelledFlightChip()
-		Flight.Info.Delayed -> DelayedFlightChip()
-		Flight.Info.Diverted -> DivertedFlightChip()
-		Flight.Info.OnTime -> OnTimeFlightChip()
-	}
-}
-
-@Composable
-fun FlightCard(
+public fun FlightCard(
 	flight: Flight,
 	modifier: Modifier = Modifier,
 ) {
@@ -124,7 +114,7 @@ fun FlightCard(
 
 @Preview
 @Composable
-fun Vir5cPreview() {
+public fun Vir5cPreview() {
 	val flight = Flight(
 		id = Flight.Id("Vir5c"),
 		from = Flight.Airport("London Heathrow", "LHR"),

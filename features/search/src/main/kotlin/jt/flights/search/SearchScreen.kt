@@ -7,15 +7,15 @@ import jt.flights.model.Flight
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data object SearchScreen : Screen {
-	data class UiState(
+public data object SearchScreen : Screen {
+	public data class UiState(
 		val loading: Boolean = true,
-		val searchResults: List<Flight>,
+		val searchResults: List<SearchPresenter.FlightPresentation>,
 		val eventSink: (Event) -> Unit,
 	) : CircuitUiState
 
-	sealed interface Event : CircuitUiEvent {
-		data class Search(
+	public sealed interface Event : CircuitUiEvent {
+		public data class Search(
 			val query: String,
 		) : Event
 	}

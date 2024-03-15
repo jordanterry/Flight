@@ -1,5 +1,5 @@
 plugins {
-	alias(libs.plugins.kotlin.jvm)
+	id("jt.flights.jvm")
 	alias(libs.plugins.square.anvil)
 }
 

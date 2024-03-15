@@ -28,13 +28,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.slack.circuit.codegen.annotations.CircuitInject
 import jt.flights.di.AppScope
+import jt.flights.search.ui.DetailedFlightCard
 import jt.flights.search.ui.FlightCard
+import jt.flights.search.ui.FlightHeader
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @CircuitInject(SearchScreen::class, AppScope::class)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Search(
+public fun Search(
 	state: SearchScreen.UiState,
 	modifier: Modifier = Modifier
 ) {
@@ -79,8 +81,12 @@ fun Search(
 				modifier = Modifier
 					.padding(18.dp)
 			) {
-				items(state.searchResults) { flight ->
-					FlightCard(flight)
+				items(state.searchResults) { presentation ->
+					when (presentation) {
+						is SearchPresenter.FlightPresentation.Header -> Text(presentation.title)
+						is SearchPresenter.FlightPresentation.ActiveFlight -> DetailedFlightCard(presentation.flight)
+						is SearchPresenter.FlightPresentation.NormalFlight -> FlightHeader(presentation.flight)
+					}
 				}
 			}
 		}

@@ -1,10 +1,8 @@
 plugins {
-	alias(libs.plugins.android.library)
-	alias(libs.plugins.kotlin.android)
+	id("jt.flights.android.library")
 }
 
 android {
-	compileSdk = 34
 	namespace = "jt.flights.foundation.compose"
 	buildFeatures {
 		compose = true
@@ -12,10 +10,6 @@ android {
 	composeOptions {
 		kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
 	}
-}
-
-kotlin {
-	jvmToolchain(JavaLanguageVersion.of(17).asInt())
 }
 
 dependencies {

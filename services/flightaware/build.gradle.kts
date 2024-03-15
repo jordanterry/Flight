@@ -1,5 +1,5 @@
 plugins {
-	alias(libs.plugins.kotlin.jvm)
+	id("jt.flights.jvm")
 	alias(libs.plugins.square.anvil)
 	alias(libs.plugins.kotlinx.serialization)
 	id("com.github.gmazzo.buildconfig") version "5.3.5"
@@ -7,10 +7,6 @@ plugins {
 
 anvil {
 	generateDaggerFactories = true
-}
-
-kotlin {
-	jvmToolchain(JavaLanguageVersion.of(17).asInt())
 }
 
 buildConfig {

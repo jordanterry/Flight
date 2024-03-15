@@ -4,7 +4,7 @@ import android.app.Application
 import com.newrelic.agent.android.NewRelic
 import jt.flights.di.AppComponent
 
-class FlightApplication : Application() {
+internal class FlightApplication : Application() {
 
 	private val appComponent: AppComponent by lazy { AppComponent.create(this) }
 

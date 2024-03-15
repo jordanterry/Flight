@@ -14,7 +14,7 @@ import java.io.IOException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-suspend inline fun Call.await(): Response {
+public suspend inline fun Call.await(): Response {
 	return suspendCancellableCoroutine { continuation ->
 		val callback = ContinuationCallback(this, continuation)
 		enqueue(callback)
@@ -22,7 +22,7 @@ suspend inline fun Call.await(): Response {
 	}
 }
 
-class ContinuationCallback(
+public class ContinuationCallback(
 	private val call: Call,
 	private val continuation: CancellableContinuation<Response>
 ) : Callback, CompletionHandler {
@@ -45,7 +45,7 @@ class ContinuationCallback(
 	}
 }
 
-suspend fun <T> Call.makeRequestAndUseBody(block: suspend (ResponseBody) -> T): Data<T> {
+public suspend fun <T> Call.makeRequestAndUseBody(block: suspend (ResponseBody) -> T): Data<T> {
 	var response: Response? = null
 	var body: ResponseBody? = null
 	return try {

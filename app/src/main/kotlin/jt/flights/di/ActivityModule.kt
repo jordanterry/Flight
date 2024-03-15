@@ -7,7 +7,7 @@ import dagger.multibindings.Multibinds
 
 @Module
 @ContributesTo(AppScope::class)
-interface ActivityModule {
+public interface ActivityModule {
 	@Multibinds
-	fun provideActivityProviders(): Map<Class<out Activity>, Activity>
+	public fun provideActivityProviders(): Map<Class<out Activity>, Activity>
 }

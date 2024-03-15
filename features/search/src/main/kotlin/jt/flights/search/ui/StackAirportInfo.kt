@@ -14,7 +14,7 @@ import jt.flights.model.Flight
 import java.util.Locale
 
 @Composable
-fun StackedAirportInfo(
+public fun StackedAirportInfo(
 	modifier: Modifier = Modifier,
 	airport: Flight.Airport
 ) {
@@ -36,7 +36,7 @@ fun StackedAirportInfo(
 
 @Preview
 @Composable
-fun PreviewLondonHeathrow() {
+public fun PreviewLondonHeathrow() {
 	val airport = Flight.Airport(
 		"London Heathrow", "LHR"
 	)

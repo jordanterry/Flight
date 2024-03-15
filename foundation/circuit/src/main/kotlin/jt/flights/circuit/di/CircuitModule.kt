@@ -13,16 +13,16 @@ import jt.flights.di.AppScope
 	scope = AppScope::class
 )
 @Module
-interface CircuitModule {
+public interface CircuitModule {
 	@Multibinds
-	fun presenterFactories(): Set<Presenter.Factory>
+	public fun presenterFactories(): Set<Presenter.Factory>
 
 	@Multibinds
-	fun viewFactories(): Set<Ui.Factory>
+	public fun viewFactories(): Set<Ui.Factory>
 
-	companion object {
+	public companion object {
 		@Provides
-		fun provideCircuit(
+		public fun provideCircuit(
 			presenterFactories: @JvmSuppressWildcards Set<Presenter.Factory>,
 			uiFactories: @JvmSuppressWildcards Set<Ui.Factory>,
 		): Circuit {

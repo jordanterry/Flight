@@ -16,7 +16,7 @@ import okhttp3.Request
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
-class FlightAwareAirportArrivalsDataSource @Inject constructor(
+public class FlightAwareAirportArrivalsDataSource @Inject constructor(
 	private val json: Json,
 	@FlightAwareOkHttp private val okHttpClient: OkHttpClient,
 	@FlightAwareBaseUrl private val httpUrl: HttpUrl,

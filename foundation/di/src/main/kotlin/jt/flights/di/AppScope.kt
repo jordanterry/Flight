@@ -1,3 +1,3 @@
 package jt.flights.di
 
-annotation class AppScope
+public annotation class AppScope

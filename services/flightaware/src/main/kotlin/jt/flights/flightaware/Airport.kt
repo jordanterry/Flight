@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Airport(
+public data class Airport(
 	@SerialName("code")
 	val code: String,
 	@SerialName("name")

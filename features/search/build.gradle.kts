@@ -1,6 +1,5 @@
 plugins {
-	alias(libs.plugins.android.library)
-	alias(libs.plugins.kotlin.android)
+	id("jt.flights.android.library")
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.square.anvil)
 	alias(libs.plugins.kotlin.ksp)
@@ -8,7 +7,6 @@ plugins {
 
 android {
 	namespace = "jt.flights.search"
-	compileSdk = 34
 
 	buildFeatures {
 		buildConfig = true
@@ -17,18 +15,10 @@ android {
 	composeOptions {
 		kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
 	}
-
-	defaultConfig {
-		minSdk = 28
-	}
 }
 
 anvil {
 	generateDaggerFactories = true
-}
-
-kotlin {
-	jvmToolchain(JavaLanguageVersion.of(17).asInt())
 }
 
 dependencies {

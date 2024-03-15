@@ -3,11 +3,11 @@ package jt.flights.arrivals
 import jt.flights.model.Data
 import jt.flights.model.Flight
 
-interface ArrivalsRepository {
+public interface ArrivalsRepository {
 
-	suspend fun search(icao: String): List<Flight>?
+	public suspend fun search(icao: String): List<Flight>?
 }
 
-fun interface AirportArrivalsDataSource {
-	suspend fun arrivals(icao: String): Data<List<Flight>>
+public fun interface AirportArrivalsDataSource {
+	public suspend fun arrivals(icao: String): Data<List<Flight>>
 }

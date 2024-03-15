@@ -1,3 +1,3 @@
 package jt.flights.di
 
-annotation class ApplicationContext
+public annotation class ApplicationContext

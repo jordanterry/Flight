@@ -12,11 +12,11 @@ import javax.inject.Qualifier
 
 @Module
 @ContributesTo(AppScope::class)
-class FlightAwareNetworkingModule {
+public class FlightAwareNetworkingModule {
 
 	@Provides
 	@FlightAwareBaseUrl
-	fun provideFlightAwareBaseUrl(): HttpUrl {
+	public fun provideFlightAwareBaseUrl(): HttpUrl {
 		return HttpUrl.Builder()
 			.scheme("https")
 			.host("aeroapi.flightaware.com")
@@ -26,7 +26,7 @@ class FlightAwareNetworkingModule {
 
 	@Provides
 	@FlightAwareOkHttp
-	fun provideFlightAwareOkHttpClient(
+	public fun provideFlightAwareOkHttpClient(
 		okHttpClient: OkHttpClient
 	): OkHttpClient {
 		return okHttpClient
@@ -41,7 +41,7 @@ class FlightAwareNetworkingModule {
 }
 
 @Qualifier
-annotation class FlightAwareBaseUrl
+public annotation class FlightAwareBaseUrl
 
 @Qualifier
-annotation class FlightAwareOkHttp
+public annotation class FlightAwareOkHttp

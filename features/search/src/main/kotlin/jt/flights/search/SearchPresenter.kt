@@ -16,15 +16,29 @@ import jt.flights.arrivals.ArrivalsRepository
 import jt.flights.di.AppScope
 import jt.flights.model.Flight
 
-class SearchPresenter @AssistedInject constructor(
+public class SearchPresenter @AssistedInject constructor(
 	private val searchRepository: SearchRepository,
 ) : Presenter<SearchScreen.UiState> {
 	@Composable
 	override fun present(): SearchScreen.UiState {
 		var flightNumber by rememberRetained { mutableStateOf("") }
-		var results by rememberRetained { mutableStateOf(emptyList<Flight>()) }
+		var results by rememberRetained { mutableStateOf(emptyList<FlightPresentation>()) }
 		LaunchedEffect(flightNumber) {
-			results = searchRepository.search(flightNumber = flightNumber) ?: emptyList()
+			val flightResults = searchRepository.search(flightNumber = flightNumber) ?: emptyList()
+			if (flightResults.isNotEmpty()) {
+				results = buildList {
+					if (flightResults.first().isActive) {
+						add(FlightPresentation.Header("Active"))
+						add(FlightPresentation.ActiveFlight(flightResults.first()))
+						if (flightResults.size > 1) {
+							add(FlightPresentation.Header("Future"))
+						}
+					}
+					addAll(flightResults.filter { !it.isActive }
+						.map { FlightPresentation.NormalFlight(it) })
+
+				}
+			}
 		}
 
 		return SearchScreen.UiState(
@@ -40,7 +54,16 @@ class SearchPresenter @AssistedInject constructor(
 
 	@CircuitInject(SearchScreen::class, AppScope::class)
 	@AssistedFactory
-	fun interface Factory {
-		fun create(): SearchPresenter
+	public fun interface Factory {
+		public fun create(): SearchPresenter
+	}
+
+	public sealed interface FlightPresentation {
+		@JvmInline
+		public value class Header(public val title: String): FlightPresentation
+		@JvmInline
+		public value class ActiveFlight(public val flight: Flight): FlightPresentation
+		@JvmInline
+		public value class NormalFlight(public val flight: Flight): FlightPresentation
 	}
 }

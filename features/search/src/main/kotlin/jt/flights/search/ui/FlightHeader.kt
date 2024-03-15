@@ -13,10 +13,8 @@ import jt.flights.model.Operator
 import kotlinx.datetime.Instant
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 
-@FormatStringsInDatetimeFormats
 @Composable
-fun FlightHeader(
-	modifier: Modifier = Modifier,
+public fun FlightHeader(
 	flight: Flight,
 ) {
 	val header = buildString {
@@ -37,15 +35,13 @@ fun FlightHeader(
 
 		},
 		trailingContent = {
-			FlightInfo(
-				flightInfo = flight.flightInfo
-			)
+
 		})
 }
 
 @Preview
 @Composable
-fun HeaderPreview() {
+public fun HeaderPreview() {
 	val flight = Flight(
 		id = Flight.Id("Vir5c"),
 		from = Flight.Airport("London Heathrow", "LHR"),

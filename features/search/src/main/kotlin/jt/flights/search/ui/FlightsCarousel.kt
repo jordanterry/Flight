@@ -13,7 +13,7 @@ import jt.flights.model.Flight
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun FlightsCarousel(
+public fun FlightsCarousel(
 	carouselTitle: String,
 	flights: List<Flight>,
 	modifier: Modifier = Modifier,

@@ -14,15 +14,15 @@ import javax.inject.Provider
 		ActivityModule::class,
 	]
 )
-interface AppComponent {
-	val activityProviders: Map<Class<out Activity>, Provider<Activity>>
+public interface AppComponent {
+	public val activityProviders: Map<Class<out Activity>, Provider<Activity>>
 
 	@Component.Factory
-	interface Factory {
-		fun create(@ApplicationContext @BindsInstance context: Context): AppComponent
+	public interface Factory {
+		public fun create(@ApplicationContext @BindsInstance context: Context): AppComponent
 	}
 
-	companion object {
-		fun create(context: Context): AppComponent = DaggerAppComponent.factory().create(context)
+	public companion object {
+		public fun create(context: Context): AppComponent = DaggerAppComponent.factory().create(context)
 	}
 }

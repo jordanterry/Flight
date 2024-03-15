@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @ContributesMultibinding(AppScope::class, boundType = Activity::class)
 @ActivityKey(FlightActivity::class)
-class FlightActivity @Inject constructor(
+public class FlightActivity @Inject constructor(
 	private val circuit: Circuit,
 ) : ComponentActivity() {
 

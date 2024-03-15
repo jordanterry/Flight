@@ -12,16 +12,16 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 @Module
 @ContributesTo(AppScope::class)
-class NetworkingModule {
+public class NetworkingModule {
 
 	@Provides
 	@IntoSet
-	fun httpLoggingInterceptor(): Interceptor {
+	public fun httpLoggingInterceptor(): Interceptor {
 		return HttpLoggingInterceptor()
 	}
 
 	@Provides
-	fun okHttpClient(
+	public fun okHttpClient(
 		interceptors: Set<@JvmSuppressWildcards Interceptor>,
 	): OkHttpClient {
 		return OkHttpClient.Builder()
@@ -32,7 +32,7 @@ class NetworkingModule {
 	}
 
 	@Provides
-	fun provideJson(): Json {
+	public fun provideJson(): Json {
 		return Json {
 			ignoreUnknownKeys = true
 		}

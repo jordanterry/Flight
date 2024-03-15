@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Operator(
+public data class Operator(
 	@SerialName("code")
 	val code: String,
 	@SerialName("name")

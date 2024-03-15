@@ -1,12 +1,7 @@
 plugins {
-	alias(libs.plugins.kotlin.jvm)
-}
-
-kotlin {
-	jvmToolchain(JavaLanguageVersion.of(17).asInt())
+	id("jt.flights.jvm")
 }
 
 dependencies {
 	api(libs.kotlinx.datetime)
-	api("com.github.kittinunf.result:result-jvm:5.5.0")
 }
