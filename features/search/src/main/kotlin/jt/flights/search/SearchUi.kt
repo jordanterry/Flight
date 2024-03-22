@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
@@ -54,8 +56,25 @@ public fun Search(
 			verticalArrangement = Arrangement.SpaceEvenly,
 		) {
 			val active = remember { mutableStateOf(false) }
+
 			SearchBar(
 				shadowElevation = 4.dp,
+				leadingIcon = {
+					  if (active.value) {
+						  Icon(
+							  imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+							  contentDescription = null,
+							  modifier = Modifier.clickable {
+								  active.value = false
+							  }
+						  )
+					  } else {
+						  Icon(
+							  imageVector = Icons.Default.Search,
+							  contentDescription = null
+						  )
+					  }
+				},
 				modifier = Modifier
 					.align(Alignment.CenterHorizontally),
 				trailingIcon = {
@@ -64,18 +83,16 @@ public fun Search(
 							modifier = Modifier.padding(2.dp)
 						)
 						is SearchPresenter.FlightPresentation.Loaded -> {
-							if (active.value) {
+							if (active.value && text.isNotEmpty()) {
 								Icon(
 									imageVector = Icons.Default.Close,
 									contentDescription = null,
 									modifier = Modifier.clickable {
-										active.value = false
+										text = ""
+										state.eventSink(
+											SearchScreen.Event.Search("")
+										)
 									}
-								)
-							} else {
-								Icon(
-									imageVector = Icons.Default.Search,
-									contentDescription = null
 								)
 							}
 						}
@@ -86,7 +103,7 @@ public fun Search(
 				},
 				query = text,
 				onQueryChange = { query ->
-					text = query
+					text = query.uppercase()
 				},
 				active = active.value,
 				onSearch = {

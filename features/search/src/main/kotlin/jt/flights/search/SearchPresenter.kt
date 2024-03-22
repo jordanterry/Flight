@@ -24,6 +24,8 @@ public class SearchPresenter(
 				val searchResult = searchResultsForFlightNumber.search(flightNumber = flightNumber)
 				presentation = FlightPresentation.Loaded(searchResult)
 			}
+		} else {
+			presentation = FlightPresentation.Loaded(SearchResultsForFlightNumber.FlightResults.JustSearch)
 		}
 
 		return SearchScreen.UiState(
