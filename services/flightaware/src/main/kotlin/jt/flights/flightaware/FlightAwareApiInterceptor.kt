@@ -16,7 +16,7 @@ public class FlightAwareApiInterceptor(
 
 	public companion object {
 		public fun create(): FlightAwareApiInterceptor {
-			return FlightAwareApiInterceptor(BuildConfig.FLIGHTAWARE_TOKEN)
+			return FlightAwareApiInterceptor(BuildConfig.FLIGHT_AWARE_TOKEN)
 		}
 	}
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 buildConfig {
-	buildConfigField("String", "FLIGHTAWARE_TOKEN", "\"" + property("flight.flightaware.token").toString() + "\"")
+	buildConfigField("String", "FLIGHT_AWARE_TOKEN", "\"" + System.getenv("FLIGHT_AWARE_TOKEN").toString() + "\"")
 }
 
 dependencies {
