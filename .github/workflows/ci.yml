@@ -8,7 +8,7 @@ on:
 jobs:
 
   check:
-    name: "Run :check"
+    name: "Check"
     runs-on: ubuntu-latest
 
     steps:
@@ -46,7 +46,7 @@ jobs:
             **/build/reports/tests/
 
   assemble:
-    name: "Assemble :check"
+    name: "Assemble"
 
     runs-on: ubuntu-latest
 
