@@ -1,7 +1,5 @@
 plugins {
     id("jt.flights.android.application")
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.square.anvil)
     alias(libs.plugins.kotlinx.serialization)
 }
 
@@ -53,14 +51,9 @@ dependencies {
     implementation(libs.circuit.runtime.presenter.android)
     implementation(libs.circuit.runtime.screen.android)
     implementation(libs.circuit.runtime.ui.android)
-    implementation(libs.dagger)
-    implementation(libs.javax.inject)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlinx.collections.immutable.jvm)
-    implementation(libs.square.anvil.annotations)
     implementation(projects.features.search)
-    implementation(projects.foundation.circuit)
-    implementation(projects.foundation.di)
     implementation(projects.foundation.networking)
     implementation(projects.services.flightaware)
     implementation(projects.services.operator)
@@ -68,7 +61,6 @@ dependencies {
 
     debugRuntimeOnly(libs.androidx.compose.ui.manifest)
 
-    kapt(libs.dagger.compiler)
 
     testImplementation(libs.kotlinx.coroutines.test)
 

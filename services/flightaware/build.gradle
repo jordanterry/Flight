@@ -1,12 +1,7 @@
 plugins {
 	id("jt.flights.jvm")
-	alias(libs.plugins.square.anvil)
 	alias(libs.plugins.kotlinx.serialization)
 	alias(libs.plugins.gmazzo.buildconfig)
-}
-
-anvil {
-	generateDaggerFactories = true
 }
 
 buildConfig {
@@ -14,11 +9,8 @@ buildConfig {
 }
 
 dependencies {
-	api(libs.dagger)
-	api(libs.javax.inject)
 	api(libs.kotlinx.datetime)
 	api(libs.kotlinx.serialization.core)
-	api(projects.foundation.di)
 	api(projects.foundation.models)
 
 	implementation(platform(libs.square.okhttp.platform))

@@ -22,8 +22,6 @@ plugins {
 }
 
 include(":app")
-include(":foundation:circuit")
-include(":foundation:di")
 include(":foundation:models")
 include(":foundation:networking")
 include(":features:search")

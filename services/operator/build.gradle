@@ -1,16 +1,8 @@
 plugins {
 	id("jt.flights.jvm")
-	alias(libs.plugins.square.anvil)
-}
-
-anvil {
-	generateDaggerFactories = true
 }
 
 dependencies {
-	api(libs.dagger)
-	api(libs.javax.inject)
-	api(projects.foundation.di)
 	api(projects.foundation.models)
 	api(projects.foundation.networking)
 	api(projects.services.flightaware)

@@ -1,6 +1,7 @@
 package jt.flights.networking
 
 
+import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 
@@ -27,9 +28,19 @@ public fun <Value, New> Resource<Value>.map(convert: (Value) -> New): Resource<N
 	)
 }
 
-public class Network internal constructor(
+public class Network(
 	internal val resolve: suspend (Request) -> Response,
 )
+
+public fun OkHttpNetwork(
+	okHttpClient: OkHttpClient = OkHttpClient()
+): Network {
+	return Network { request ->
+		okHttpClient
+			.newCall(request)
+			.await()
+	}
+}
 
 public suspend fun <Value> Network.fetch(
 	resource: Resource<Value>

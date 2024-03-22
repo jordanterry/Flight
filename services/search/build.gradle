@@ -1,22 +1,12 @@
 plugins {
 	id("jt.flights.android.library")
-	alias(libs.plugins.square.anvil)
-	alias(libs.plugins.kotlin.ksp)
 }
 
 android {
-	namespace = "jt.flights.service.o11y"
-}
-
-anvil {
-	generateDaggerFactories = true
+	namespace = "jt.flights.service.search"
 }
 
 dependencies {
-	api(libs.dagger)
-	api(libs.javax.inject)
-	api(libs.square.anvil.annotations)
-	api(projects.foundation.di)
 	api(projects.foundation.models)
 	api(projects.foundation.networking)
 	api(projects.services.flightaware)
@@ -27,4 +17,8 @@ dependencies {
 	implementation(libs.kotlinx.serialization.core)
 	implementation(libs.kotlinx.serialization.json)
 	implementation(libs.square.okhttp)
+
+	testImplementation(libs.square.okhttp.mockwebserver)
+	testImplementation(libs.kotlinx.coroutines.test)
+	testImplementation(libs.kotlin.test)
 }

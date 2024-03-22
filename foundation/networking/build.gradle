@@ -1,23 +1,14 @@
 plugins {
 	id("jt.flights.jvm")
-	alias(libs.plugins.square.anvil)
-}
-
-anvil {
-	generateDaggerFactories = true
 }
 
 dependencies {
 	api(platform(libs.square.okhttp.platform))
-	api(libs.dagger)
-	api(libs.javax.inject)
 	api(libs.kotlinx.coroutines)
 	api(libs.kotlinx.serialization.json)
 	api(libs.square.okhttp)
-	api(projects.foundation.di)
 
 	implementation(libs.kotlinx.serialization.core)
-	implementation(libs.square.anvil.annotations)
 	implementation(libs.square.okhttp.logging.interceptor)
 	implementation(projects.foundation.models)
 }
