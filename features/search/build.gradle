@@ -22,7 +22,6 @@ dependencies {
 	api(libs.circuit.runtime.android)
 	api(libs.circuit.runtime.presenter.android)
 	api(libs.circuit.runtime.screen.android)
-	api(libs.circuit.runtime.ui.android)
 	api(libs.foundation.layout.android)
 	api(projects.foundation.models)
 	api(projects.services.search)

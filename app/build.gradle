@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+    implementation(platform(libs.square.okhttp.platform))
     implementation(libs.androidx.activity)
     implementation(libs.androidx.compose.activity)
     implementation(libs.androidx.core)
@@ -53,14 +54,13 @@ dependencies {
     implementation(libs.circuit.runtime.ui.android)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlinx.collections.immutable.jvm)
+    implementation(libs.square.okhttp)
     implementation(projects.features.search)
     implementation(projects.foundation.networking)
     implementation(projects.services.flightaware)
-    implementation(projects.services.operator)
     implementation(projects.services.search)
 
     debugRuntimeOnly(libs.androidx.compose.ui.manifest)
-
 
     testImplementation(libs.kotlinx.coroutines.test)
 

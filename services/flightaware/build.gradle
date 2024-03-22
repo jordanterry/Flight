@@ -11,9 +11,8 @@ buildConfig {
 dependencies {
 	api(libs.kotlinx.datetime)
 	api(libs.kotlinx.serialization.core)
+	api(libs.square.okhttp)
 	api(projects.foundation.models)
 
 	implementation(platform(libs.square.okhttp.platform))
-	implementation(libs.square.okhttp)
-	implementation(projects.foundation.networking)
 }

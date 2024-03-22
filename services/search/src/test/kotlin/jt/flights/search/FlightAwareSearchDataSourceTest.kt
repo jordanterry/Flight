@@ -6,8 +6,8 @@ import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
 import java.io.IOException
+import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -23,7 +23,7 @@ class FlightAwareSearchDataSourceTest {
 		mockWebServer.start()
 	}
 
-	@After
+	@AfterTest
 	fun after() {
 		mockWebServer.shutdown()
 	}

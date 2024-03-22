@@ -5,10 +5,8 @@ plugins {
 dependencies {
 	api(platform(libs.square.okhttp.platform))
 	api(libs.kotlinx.coroutines)
-	api(libs.kotlinx.serialization.json)
 	api(libs.square.okhttp)
 
 	implementation(libs.kotlinx.serialization.core)
-	implementation(libs.square.okhttp.logging.interceptor)
 	implementation(projects.foundation.models)
 }
