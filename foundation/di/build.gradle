@@ -1,0 +1,3 @@
+plugins {
+	id("jt.flights.jvm")
+}

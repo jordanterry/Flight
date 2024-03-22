@@ -13,10 +13,11 @@ public class OperatorRepositoryImpl @Inject constructor(
 	private val operatorDataSource: OperatorDataSource,
 ) : OperatorRepository {
 	override suspend fun details(icao: String): Operator? = withContext(Dispatchers.IO) {
-		when (val searchResult = operatorDataSource.search(icao = icao)) {
-			is Data.Error -> null
-			is Data.None -> null
-			is Data.Some -> searchResult.data
+		val searchResult = operatorDataSource.search(icao = icao)
+		if (searchResult.isSuccess) {
+			searchResult.getOrThrow()
+		} else {
+			null
 		}
 	}
 }

@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 plugins {
 	id("com.android.library")
 	id("org.jetbrains.kotlin.android")
+	id("com.squareup.sort-dependencies")
 }
 
 (extensions["android"] as LibraryExtension).apply {

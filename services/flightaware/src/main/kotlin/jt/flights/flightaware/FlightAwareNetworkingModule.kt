@@ -5,6 +5,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import jt.flights.di.AppScope
+import jt.flights.networking.Network
 import jt.flights.networking.flightaware.FlightAwareApiInterceptor
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -16,27 +17,13 @@ public class FlightAwareNetworkingModule {
 
 	@Provides
 	@FlightAwareBaseUrl
-	public fun provideFlightAwareBaseUrl(): HttpUrl {
+	public fun provideFlightAwareBaseUrl(): String {
 		return HttpUrl.Builder()
 			.scheme("https")
 			.host("aeroapi.flightaware.com")
 			.addPathSegment("aeroapi")
 			.build()
-	}
-
-	@Provides
-	@FlightAwareOkHttp
-	public fun provideFlightAwareOkHttpClient(
-		okHttpClient: OkHttpClient
-	): OkHttpClient {
-		return okHttpClient
-			.newBuilder()
-			.addInterceptor(
-				FlightAwareApiInterceptor(
-					token = BuildConfig.FLIGHTAWARE_TOKEN,
-				)
-			)
-			.build()
+			.toString()
 	}
 }
 

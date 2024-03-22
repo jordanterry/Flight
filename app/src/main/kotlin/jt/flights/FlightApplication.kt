@@ -1,7 +1,6 @@
 package jt.flights
 
 import android.app.Application
-import com.newrelic.agent.android.NewRelic
 import jt.flights.di.AppComponent
 
 internal class FlightApplication : Application() {

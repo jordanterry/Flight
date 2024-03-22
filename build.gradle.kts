@@ -1,13 +1,3 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-
-	dependencies {
-		classpath(libs.agent.gradle.plugin)
-	}
-}
-
 plugins {
 	alias(libs.plugins.android.application) apply false
 	alias(libs.plugins.android.library) apply false
@@ -18,4 +8,16 @@ plugins {
 	alias(libs.plugins.kotlin.kapt) apply false
 	alias(libs.plugins.square.anvil) apply false
 	alias(libs.plugins.gmazzo.buildconfig) apply false
+	alias(libs.plugins.square.sort.dependencies) apply false
+	alias(libs.plugins.dependency.analysis)
+}
+
+dependencyAnalysis {
+	issues {
+		all {
+			onAny {
+				exclude("com.squareup.anvil:annotations")
+			}
+		}
+	}
 }

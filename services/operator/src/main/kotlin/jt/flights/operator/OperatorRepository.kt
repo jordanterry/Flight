@@ -10,5 +10,5 @@ public interface OperatorRepository {
 
 
 public fun interface OperatorDataSource {
-	public suspend fun search(icao: String): Data<Operator?>
+	public suspend fun search(icao: String): Result<Operator?>
 }

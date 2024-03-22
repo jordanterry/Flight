@@ -32,6 +32,15 @@ public class NetworkingModule {
 	}
 
 	@Provides
+	public fun provideNetwork(okHttpClient: OkHttpClient): Network {
+		return Network { request ->
+			okHttpClient
+				.newCall(request)
+				.await()
+		}
+	}
+
+	@Provides
 	public fun provideJson(): Json {
 		return Json {
 			ignoreUnknownKeys = true

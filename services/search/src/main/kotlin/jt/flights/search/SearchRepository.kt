@@ -10,5 +10,5 @@ public interface SearchRepository {
 }
 
 public fun interface SearchDataSource {
-	public suspend fun search(flightNumber: String): Data<List<Flight>>
+	public suspend fun search(flightNumber: String): Result<List<Flight>>
 }

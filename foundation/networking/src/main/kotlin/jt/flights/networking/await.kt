@@ -1,6 +1,5 @@
 package jt.flights.networking
 
-import com.newrelic.agent.android.NewRelic
 import jt.flights.model.Data
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CompletionHandler
@@ -57,13 +56,11 @@ public suspend fun <T> Call.makeRequestAndUseBody(block: suspend (ResponseBody) 
 			return Data.None("Response code: ${response.code}")
 		}
 	} catch (ioException: IOException) {
-		NewRelic.recordHandledException(ioException)
 		ioException.printStackTrace()
 		Data.Error(
 			exception = ioException
 		)
 	} catch (serializationException: SerializationException) {
-		NewRelic.recordHandledException(serializationException)
 		serializationException.printStackTrace()
 		Data.Error(
 			exception = serializationException

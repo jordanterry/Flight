@@ -8,7 +8,7 @@ dependencies {
 	implementation(libs.plugins.android.library.asDependency())
 	implementation(libs.plugins.kotlin.android.asDependency())
 	implementation(libs.plugins.kotlin.jvm.asDependency())
-//	implementation(libs.plugins.spotless)
+	implementation(libs.plugins.square.sort.dependencies.asDependency())
 }
 
 kotlin {

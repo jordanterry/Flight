@@ -1,9 +1,10 @@
-import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
 	id("org.jetbrains.kotlin.jvm")
+	id("com.android.lint")
+	id("com.squareup.sort-dependencies")
 }
 
 extensions.configure<KotlinJvmProjectExtension> {

@@ -1,0 +1,53 @@
+plugins {
+	id("jt.flights.android.library")
+	alias(libs.plugins.kotlin.parcelize)
+	alias(libs.plugins.square.anvil)
+	alias(libs.plugins.kotlin.ksp)
+}
+
+android {
+	namespace = "jt.flights.search"
+
+	buildFeatures {
+		buildConfig = true
+		compose = true
+	}
+	composeOptions {
+		kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+	}
+}
+
+anvil {
+	generateDaggerFactories = true
+}
+
+dependencies {
+	ksp(libs.circuit.codegen)
+
+	api(libs.androidx.material3.android)
+	api(libs.androidx.runtime.android)
+	api(libs.androidx.ui.android)
+	api(libs.circuit.codegen.annotations.android)
+	api(libs.circuit.runtime.android)
+	api(libs.circuit.runtime.presenter.android)
+	api(libs.circuit.runtime.screen.android)
+	api(libs.circuit.runtime.ui.android)
+	api(libs.dagger)
+	api(libs.foundation.layout.android)
+	api(libs.javax.inject)
+	api(libs.square.anvil.annotations)
+	api(projects.foundation.di)
+	api(projects.foundation.models)
+	api(projects.services.search)
+
+	implementation(libs.androidx.material.icons.core.android)
+	implementation(libs.androidx.ui.graphics.android)
+	implementation(libs.androidx.ui.text.android)
+	implementation(libs.androidx.ui.tooling.preview.android)
+	implementation(libs.androidx.ui.unit.android)
+	implementation(libs.circuit.retained.android)
+	implementation(libs.foundation.android)
+	implementation(libs.kotlin.parcelize.runtime)
+	implementation(libs.kotlinx.coroutines.core.jvm)
+	implementation(libs.kotlinx.datetime)
+}

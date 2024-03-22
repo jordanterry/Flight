@@ -17,16 +17,16 @@ dependencyResolutionManagement {
 	}
 }
 rootProject.name = "Flights"
+plugins {
+	id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
+}
 
 include(":app")
 include(":foundation:circuit")
-include(":foundation:compose")
 include(":foundation:di")
 include(":foundation:models")
 include(":foundation:networking")
-include(":foundation:o11y")
 include(":features:search")
 include(":services:flightaware")
 include(":services:search")
-include(":services:arrivals")
 include(":services:operator")
