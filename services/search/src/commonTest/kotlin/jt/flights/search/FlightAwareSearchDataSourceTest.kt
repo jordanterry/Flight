@@ -33,7 +33,7 @@ class FlightAwareSearchDataSourceTest {
 		val network = Network {
 			throw IOException("Internet issue!")
 		}
-		val flightAwareSearchDataSource = FlightAwareSearchDataSource(
+		val flightAwareSearchDataSource = NetworkSearchDataSource(
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)
@@ -54,7 +54,7 @@ class FlightAwareSearchDataSourceTest {
 					getFile("responses/flights/sia321.json")
 				)
 		)
-		val flightAwareSearchDataSource = FlightAwareSearchDataSource(
+		val flightAwareSearchDataSource = NetworkSearchDataSource(
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)
@@ -75,7 +75,7 @@ class FlightAwareSearchDataSourceTest {
 					getFile("responses/flights/sia321_malformed.json")
 				)
 		)
-		val flightAwareSearchDataSource = FlightAwareSearchDataSource(
+		val flightAwareSearchDataSource = NetworkSearchDataSource(
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)
@@ -93,7 +93,7 @@ class FlightAwareSearchDataSourceTest {
 					getFile("responses/flights/sia321_malformed.json")
 				)
 		)
-		val flightAwareSearchDataSource = FlightAwareSearchDataSource(
+		val flightAwareSearchDataSource = NetworkSearchDataSource(
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)

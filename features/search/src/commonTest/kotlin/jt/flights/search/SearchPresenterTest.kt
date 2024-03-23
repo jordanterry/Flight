@@ -44,7 +44,7 @@ class SearchPresenterTest {
 	}
 
 	@Test
-	fun `test search term history`() = runTest {
+	fun `test search term history with search term and data`() = runTest {
 		searches.searchQueries.insert("BA1234")
 		searches.searchQueries.insert("BA1232")
 		searches.searchQueries.insert("UAL1")
@@ -54,6 +54,41 @@ class SearchPresenterTest {
 			assertEquals(0, firstState.searchResults.size)
 			assertEquals(0, awaitItem().searchResults.size) // recompose
 			assertEquals(2, awaitItem().searchResults.size) // results loaded
+		}
+	}
+
+	@Test
+	fun `test search term history with search term and no data`() = runTest {
+		searchPresenter.test {
+			val firstState = awaitItem()
+			firstState.eventSink(SearchScreen.Event.SearchChange(SearchTerm("BA")))
+			assertEquals(0, firstState.searchResults.size)
+			assertEquals(0, awaitItem().searchResults.size) // recompose
+		}
+	}
+
+	@Test
+	fun `test save search term`() = runTest {
+		searchPresenter.test {
+			val firstState = awaitItem()
+			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("BA1234")))
+			assertEquals(0, firstState.searchResults.size)
+			cancelAndConsumeRemainingEvents()
+			val search = searches.searchQueries.selectAll().executeAsOne()
+			assertEquals("BA1234", search.search)
+		}
+	}
+
+
+	@Test
+	fun `test flights are returned when searching`() = runTest {
+		searchPresenter.test {
+			val firstState = awaitItem()
+			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("BA1234")))
+			assertEquals(0, firstState.searchResults.size)
+			cancelAndConsumeRemainingEvents()
+			val search = searches.searchQueries.selectAll().executeAsOne()
+			assertEquals("BA1234", search.search)
 		}
 	}
 }

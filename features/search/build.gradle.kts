@@ -3,6 +3,7 @@ plugins {
 	alias(libs.plugins.kotlin.multiplatform)
 	alias(libs.plugins.jetbrains.compose)
 	alias(libs.plugins.kotlin.parcelize)
+	alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
@@ -22,6 +23,10 @@ kotlin {
 	sourceSets {
 		commonMain {
 			dependencies {
+				api(libs.circuit.foundation)
+				api(projects.foundation.models)
+				api(projects.services.search)
+
 				implementation(compose.runtime)
 				implementation(compose.foundation)
 				implementation(compose.material3)
@@ -29,9 +34,7 @@ kotlin {
 				implementation(compose.ui)
 				implementation(compose.components.resources)
 				implementation(compose.components.uiToolingPreview)
-				api(libs.circuit.foundation)
-				api(projects.foundation.models)
-				api(projects.services.search)
+				implementation(libs.kotlinx.serialization.json)
 				implementation(libs.kotlinx.coroutines)
 				implementation(libs.kotlinx.datetime)
 				implementation("app.cash.sqldelight:coroutines-extensions:2.0.1")
@@ -40,7 +43,7 @@ kotlin {
 			commonTest.dependencies {
 				implementation("app.cash.sqldelight:sqlite-driver:2.0.1")
 				implementation(libs.circuit.test)
-				implementation(kotlin("test"))
+				implementation(libs.kotlin.test)
 				implementation(libs.kotlinx.coroutines.test)
 				implementation(libs.square.okhttp.mockwebserver)
 			}

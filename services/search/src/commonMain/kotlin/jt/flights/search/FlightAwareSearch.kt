@@ -1,6 +1,6 @@
 package jt.flights.search
 
-import jt.flights.flightaware.FlightsResult
+import jt.flights.flightaware.FlightAwareResult
 import jt.flights.networking.Resource
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -15,7 +15,7 @@ internal fun Resource.Companion.flightAwareSearch(
 	// Todo: How do we get this in here nicely?
 	flightAwareBaseUrl: String,
 	flightNumber: SearchTerm
-): Resource<FlightsResult> {
+): Resource<FlightAwareResult> {
 	return Resource(
 		request = {
 			val searchUrl = flightAwareBaseUrl.toHttpUrl()
@@ -33,7 +33,7 @@ internal fun Resource.Companion.flightAwareSearch(
 			requireNotNull(body) { "Response body cannot be empty." }
 			if (response.isSuccessful) {
 				val flights = json
-					.decodeFromString<FlightsResult>(body.string())
+					.decodeFromString<FlightAwareResult>(body.string())
 				Result.success(flights)
 			} else {
 				Result.failure(RuntimeException("oh oh"))
