@@ -14,14 +14,14 @@ private val json = Json {
 internal fun Resource.Companion.flightAwareSearch(
 	// Todo: How do we get this in here nicely?
 	flightAwareBaseUrl: String,
-	flightNumber: String
+	flightNumber: SearchTerm
 ): Resource<FlightsResult> {
 	return Resource(
 		request = {
 			val searchUrl = flightAwareBaseUrl.toHttpUrl()
 				.newBuilder()
 				.addPathSegment("flights")
-				.addPathSegment(flightNumber)
+				.addPathSegment(flightNumber.value)
 				.build()
 			Request.Builder()
 				.url(searchUrl)

@@ -1,12 +1,14 @@
 plugins {
 	id("jt.flights.android.library")
+	alias(libs.plugins.kotlin.ksp)
 }
 
 android {
 	namespace = "jt.flights.service.search"
 }
-
 dependencies {
+	ksp(libs.room.compiler)
+
 	api(projects.foundation.models)
 	api(projects.foundation.networking)
 	api(projects.services.flightaware)
@@ -15,9 +17,11 @@ dependencies {
 	implementation(libs.kotlinx.coroutines)
 	implementation(libs.kotlinx.serialization.core)
 	implementation(libs.kotlinx.serialization.json)
+	implementation(libs.room.ktx)
 	implementation(libs.square.okhttp)
 
 	testImplementation(libs.kotlin.test)
 	testImplementation(libs.kotlinx.coroutines.test)
 	testImplementation(libs.square.okhttp.mockwebserver)
 }
+

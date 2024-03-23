@@ -5,10 +5,10 @@ import jt.flights.model.Flight
 
 public interface SearchRepository {
 
-	public suspend fun search(flightNumber: String): List<Flight>?
+	public suspend fun search(flightNumber: SearchTerm): List<Flight>?
 
 }
 
 public fun interface SearchDataSource {
-	public suspend fun search(flightNumber: String): Result<List<Flight>>
+	public suspend fun search(flightNumber: SearchTerm): Result<List<Flight>>
 }

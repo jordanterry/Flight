@@ -11,7 +11,7 @@ public class FlightAwareSearchDataSource(
 	private val flightAwareBaseUrl: String,
 	private val network: Network,
 ) : SearchDataSource {
-	public override suspend fun search(flightNumber: String): Result<List<Flight>> {
+	public override suspend fun search(flightNumber: SearchTerm): Result<List<Flight>> {
 		val resource = Resource
 			.flightAwareSearch(
 				flightAwareBaseUrl,

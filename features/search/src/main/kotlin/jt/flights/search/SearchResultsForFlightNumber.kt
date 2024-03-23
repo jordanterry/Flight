@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 public class SearchResultsForFlightNumber(
 	private val searchRepository: SearchRepository,
 ) {
-	public suspend fun search(flightNumber: String): FlightResults = withContext(Dispatchers.IO) {
+	public suspend fun search(flightNumber: SearchTerm): FlightResults = withContext(Dispatchers.IO) {
 		val flightResults = searchRepository.search(flightNumber = flightNumber)
 		if (flightResults.isNullOrEmpty()) return@withContext FlightResults.NoResultsFound
 		val activeFlight = flightResults.firstOrNull { flight -> flight.isActive }

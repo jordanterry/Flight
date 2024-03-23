@@ -11,13 +11,17 @@ import kotlinx.parcelize.Parcelize
 public data object SearchScreen : Screen {
 	@Stable
 	public data class UiState(
+		val searchResults: List<SearchTerm>,
 		val presentation: SearchPresenter.FlightPresentation,
 		val eventSink: (Event) -> Unit,
 	) : CircuitUiState
 
 	public sealed interface Event : CircuitUiEvent {
 		public data class Search(
-			val query: String,
+			val query: SearchTerm,
+		) : Event
+		public data class SearchChange(
+			val query: SearchTerm,
 		) : Event
 	}
 }
