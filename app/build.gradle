@@ -63,6 +63,7 @@ dependencies {
     implementation(projects.foundation.networking)
     implementation(projects.services.flightaware)
     implementation(projects.services.search)
+    implementation(libs.android.driver)
 
     debugRuntimeOnly(libs.androidx.compose.ui.manifest)
 

@@ -37,7 +37,7 @@ class FlightAwareSearchDataSourceTest {
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)
-		val result = flightAwareSearchDataSource.search("sia321")
+		val result = flightAwareSearchDataSource.search(SearchTerm("sia321"))
 		assertTrue(result.isFailure)
 		val exception = result.exceptionOrNull()
 		assertNotNull(exception)
@@ -58,7 +58,7 @@ class FlightAwareSearchDataSourceTest {
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)
-		val result = flightAwareSearchDataSource.search("sia321")
+		val result = flightAwareSearchDataSource.search(SearchTerm("sia321"))
 		assertTrue(result.isSuccess)
 		val request = mockWebServer.takeRequest()
 		assertEquals("/flights/sia321", request.requestUrl?.encodedPath)
@@ -79,7 +79,7 @@ class FlightAwareSearchDataSourceTest {
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)
-		val result = flightAwareSearchDataSource.search("sia321")
+		val result = flightAwareSearchDataSource.search(SearchTerm("sia321"))
 		assertTrue(result.isFailure)
 	}
 
@@ -97,7 +97,7 @@ class FlightAwareSearchDataSourceTest {
 			flightAwareBaseUrl = mockWebServer.url("").toString(),
 			network = network
 		)
-		val result = flightAwareSearchDataSource.search("ba01")
+		val result = flightAwareSearchDataSource.search(SearchTerm("ba01"))
 		assertTrue(result.isFailure)
 	}
 

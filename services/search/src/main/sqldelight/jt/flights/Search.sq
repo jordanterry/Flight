@@ -1,0 +1,20 @@
+CREATE TABLE Search (
+  id INTEGER PRIMARY KEY NOT NULL,
+  search TEXT NOT NULL
+);
+
+CREATE INDEX Search_search ON Search(search);
+
+
+insert:
+INSERT INTO Search(search)
+VALUES (?);
+
+selectAll:
+SELECT *
+FROM Search;
+
+selectByTerm:
+SELECT *
+FROM Search
+WHERE search LIKE ('%' || :search || '%');

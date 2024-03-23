@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.1"
+android-driver = "2.0.1"
 androidx-compose = "1.6.4"
 androidx-activity-compose = "1.8.2"
 androidx-foundation-layout-android = "1.6.4"
@@ -30,6 +31,7 @@ room = "2.6.1"
 kotlin-ksp = "1.9.22-1.0.17"
 
 [libraries]
+android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "android-driver" }
 androidx-activity = { module = "androidx.activity:activity", version.ref = "androidx-activity-compose" }
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-compose" }
@@ -51,6 +53,7 @@ circuit-runtime-android = { module = "com.slack.circuit:circuit-runtime-android"
 circuit-runtime-presenter-android = { module = "com.slack.circuit:circuit-runtime-presenter-android", version.ref = "slack-circuit" }
 circuit-runtime-screen-android = { module = "com.slack.circuit:circuit-runtime-screen-android", version.ref = "slack-circuit" }
 circuit-runtime-ui-android = { module = "com.slack.circuit:circuit-runtime-ui-android", version.ref = "slack-circuit" }
+circuit-test = { module = "com.slack.circuit:circuit-test", version.ref = "slack-circuit" }
 foundation-android = { module = "androidx.compose.foundation:foundation-android", version.ref = "androidx-foundation-android" }
 foundation-layout-android = { module = "androidx.compose.foundation:foundation-layout-android", version.ref = "androidx-foundation-layout-android" }
 kotlin-parcelize-runtime = { module = "org.jetbrains.kotlin:kotlin-parcelize-runtime", version.ref = "kotlin-parcelize-runtime" }

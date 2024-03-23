@@ -22,6 +22,7 @@ dependencies {
 	api(libs.circuit.runtime.android)
 	api(libs.circuit.runtime.presenter.android)
 	api(libs.circuit.runtime.screen.android)
+	api(libs.circuit.runtime.ui.android)
 	api(libs.foundation.layout.android)
 	api(projects.foundation.models)
 	api(projects.services.search)
@@ -36,4 +37,11 @@ dependencies {
 	implementation(libs.kotlin.parcelize.runtime)
 	implementation(libs.kotlinx.coroutines.core.jvm)
 	implementation(libs.kotlinx.datetime)
+	implementation "app.cash.sqldelight:coroutines-extensions:2.0.1"
+
+	testImplementation "app.cash.sqldelight:sqlite-driver:2.0.1"
+	testImplementation(libs.circuit.test)
+	testImplementation(libs.kotlin.test)
+	testImplementation(libs.kotlinx.coroutines.test)
+	testImplementation(libs.square.okhttp.mockwebserver)
 }

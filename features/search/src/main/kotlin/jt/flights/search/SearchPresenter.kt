@@ -8,38 +8,49 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.slack.circuit.retained.rememberRetained
 import com.slack.circuit.runtime.presenter.Presenter
+import jt.flights.search.usecases.AllSearchHistory
+import jt.flights.search.usecases.FlightResults
+import jt.flights.search.usecases.SaveSearchTerm
+import jt.flights.search.usecases.SearchHistoryForTerm
+import jt.flights.search.usecases.SearchResultsForFlightNumber
 import kotlinx.coroutines.launch
 
-public class SearchPresenter(
+public class SearchPresenter internal constructor(
 	private val searchResultsForFlightNumber: SearchResultsForFlightNumber,
-	private val searchHistoryRepository: SearchHistoryRepositoryImpl,
+	private val searchHistoryForTerm: SearchHistoryForTerm,
+	private val allSearchHistory: AllSearchHistory,
+	private val saveSearchTerm: SaveSearchTerm,
 ) : Presenter<SearchScreen.UiState> {
 	@Composable
 	override fun present(): SearchScreen.UiState {
 		var nonSearchFlight by rememberRetained { mutableStateOf(SearchTerm("")) }
 		var flightNumber by rememberRetained { mutableStateOf(SearchTerm("")) }
 		var presentation by rememberRetained {
-			mutableStateOf<FlightPresentation>(FlightPresentation.Loaded(SearchResultsForFlightNumber.FlightResults.JustSearch))
+			mutableStateOf<FlightPresentation>(FlightPresentation.Loaded(FlightResults.JustSearch))
 		}
 		var search by rememberRetained { mutableStateOf<List<SearchTerm>>(emptyList()) }
 
 		if (flightNumber.value.isNotEmpty()) {
 			LaunchedEffect(flightNumber) {
 				launch {
-					searchHistoryRepository.save(flightNumber)
+					saveSearchTerm(flightNumber)
 				}
 				presentation = FlightPresentation.Loading
-				val searchResult = searchResultsForFlightNumber.search(flightNumber = flightNumber)
+				val searchResult = searchResultsForFlightNumber(searchTerm = flightNumber)
 				presentation = FlightPresentation.Loaded(searchResult)
 			}
 		} else {
 			presentation = FlightPresentation.Loaded(
-				flightResults = SearchResultsForFlightNumber.FlightResults.JustSearch
+				flightResults = FlightResults.JustSearch
 			)
 		}
 
 		LaunchedEffect(nonSearchFlight) {
-			search = searchHistoryRepository.get(nonSearchFlight)
+			search = if (nonSearchFlight.isEmpty()) {
+				allSearchHistory(take = 10)
+			} else {
+				searchHistoryForTerm(nonSearchFlight)
+			}
 		}
 
 		return SearchScreen.UiState(
@@ -64,7 +75,7 @@ public class SearchPresenter(
 
 		@JvmInline
 		public value class Loaded(
-			public val flightResults: SearchResultsForFlightNumber.FlightResults
+			public val flightResults: FlightResults
 		): FlightPresentation
 	}
 }

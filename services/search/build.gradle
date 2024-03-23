@@ -1,17 +1,29 @@
 plugins {
 	id("jt.flights.android.library")
 	alias(libs.plugins.kotlin.ksp)
+	id "app.cash.sqldelight" version "2.0.1"
 }
 
 android {
 	namespace = "jt.flights.service.search"
 }
+
+sqldelight {
+	databases {
+		Searches {
+			packageName = "jt.flights"
+		}
+	}
+}
+
 dependencies {
 	ksp(libs.room.compiler)
 
 	api(projects.foundation.models)
 	api(projects.foundation.networking)
 	api(projects.services.flightaware)
+
+	implementation "app.cash.sqldelight:sqlite-driver:2.0.1"
 
 	implementation(platform(libs.square.okhttp.platform))
 	implementation(libs.kotlinx.coroutines)
