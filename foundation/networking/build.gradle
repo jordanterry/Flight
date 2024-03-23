@@ -1,12 +1,19 @@
 plugins {
-	id("jt.flights.jvm")
+	alias(libs.plugins.kotlin.multiplatform)
 }
 
-dependencies {
-	api(platform(libs.square.okhttp.platform))
-	api(libs.kotlinx.coroutines)
-	api(libs.square.okhttp)
+kotlin {
+	jvm()
+	sourceSets {
+		commonMain {
+			dependencies {
+				api(libs.square.okhttp)
+				api(libs.kotlinx.coroutines)
+				api(libs.square.okhttp)
 
-	implementation(libs.kotlinx.serialization.core)
-	implementation(projects.foundation.models)
+				implementation(libs.kotlinx.serialization.core)
+				implementation(projects.foundation.models)
+			}
+		}
+	}
 }

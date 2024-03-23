@@ -1,7 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
 pluginManagement {
-	includeBuild("gradle/conventions")
 	repositories {
 		google()
 		mavenCentral()
@@ -27,4 +26,3 @@ include(":foundation:networking")
 include(":features:search")
 include(":services:flightaware")
 include(":services:search")
-include(":services:operator")
