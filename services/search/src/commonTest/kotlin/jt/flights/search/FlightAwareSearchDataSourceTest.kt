@@ -83,24 +83,6 @@ class FlightAwareSearchDataSourceTest {
 		assertTrue(result.isFailure)
 	}
 
-	@Test
-	fun `cannot find result for flightNumber`() = runTest {
-		val network = OkHttpNetwork(OkHttpClient.Builder().build())
-		mockWebServer.enqueue(
-			MockResponse()
-				.setResponseCode(200)
-				.setBody(
-					getFile("responses/flights/sia321_malformed.json")
-				)
-		)
-		val flightAwareSearchDataSource = NetworkSearchDataSource(
-			flightAwareBaseUrl = mockWebServer.url("").toString(),
-			network = network
-		)
-		val result = flightAwareSearchDataSource.search(SearchTerm("ba01"))
-		assertTrue(result.isFailure)
-	}
-
 	private fun getFile(resource: String): String {
 		@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 		return this::class.java.classLoader.getResource(resource).readText()

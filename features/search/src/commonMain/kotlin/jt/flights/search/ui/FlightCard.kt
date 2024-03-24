@@ -100,6 +100,7 @@ fun HeaderPreview() {
 		isActive = true,
 		flightInfo = Flight.Info.Delayed,
 		fromInstant = Instant.parse("2024-02-24T22:15:00Z"),
+		flightTime = "1h 25",
 		operator = Operator(Operator.Id("BA"), "British Airways")
 	)
 	FlightHeader(flight)
@@ -107,6 +108,7 @@ fun HeaderPreview() {
 
 @Composable
 fun ToAndFromAirportInfo(
+	flightTime: String? = null,
 	from: Flight.Airport,
 	to: Flight.Airport,
 	modifier: Modifier = Modifier,
@@ -121,15 +123,17 @@ fun ToAndFromAirportInfo(
 			modifier = Modifier.fillMaxWidth().weight(3f),
 			horizontalAlignment = Alignment.Start,
 		)
-		Column(
-			modifier = Modifier.background(MaterialTheme.colorScheme.background).fillMaxWidth().weight(1f),
-			verticalArrangement = Arrangement.Center,
-		) {
-			Text(
-				text = "1h 25m",
-				style = MaterialTheme.typography.labelMedium,
-				color = MaterialTheme.colorScheme.onBackground,
-			)
+		if (flightTime != null) {
+			Column(
+				modifier = Modifier.background(MaterialTheme.colorScheme.background).fillMaxWidth().weight(1f),
+				verticalArrangement = Arrangement.Center,
+			) {
+				Text(
+					text = "1h 25m",
+					style = MaterialTheme.typography.labelMedium,
+					color = MaterialTheme.colorScheme.onBackground,
+				)
+			}
 		}
 		StackedAirportInfo(
 			airport = to,
@@ -232,7 +236,8 @@ public fun FlightCardLHRToMIA() {
 		isActive = true,
 		flightInfo = Flight.Info.Delayed,
 		fromInstant = Instant.parse("2024-02-24T22:15:00Z"),
-		operator = Operator(Operator.Id("BA"), "British Airways")
+		operator = Operator(Operator.Id("BA"), "British Airways"),
+		flightTime = "1h 30m"
 	)
 	FlightCard(flight = flight)
 }

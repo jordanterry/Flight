@@ -18,6 +18,7 @@ public data class Flight(
 	val toInstant: Instant? = null,
 	val isActive: Boolean,
 	val flightInfo: Info,
+	val flightTime: String? = null,
 	val operator: Operator? = null,
 ) {
 	public sealed interface Info {

@@ -1,21 +1,32 @@
 package jt.flights.search
 
+import SIA_RESPONSE
+import app.cash.paparazzi.Paparazzi
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.slack.circuit.test.test
 import jt.flights.Searches
+import jt.flights.model.Flight
 import jt.flights.networking.Network
 import jt.flights.networking.OkHttpNetwork
 import jt.flights.search.usecases.AllSearchHistory
+import jt.flights.search.usecases.FlightResults
 import jt.flights.search.usecases.SearchHistoryForTerm
 import jt.flights.search.usecases.SaveSearchTerm
 import jt.flights.search.usecases.SearchResultsForFlightNumber
 import kotlinx.coroutines.test.runTest
+import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import kotlin.test.Test
-import kotlin.test.AfterTest
+import org.junit.After
+import org.junit.Rule
+import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertTrue
 
 class SearchPresenterTest {
+
+	@get:Rule
+	val paparazzi = Paparazzi()
 
 	private val mockWebServer: MockWebServer = MockWebServer().apply {
 		start()
@@ -38,13 +49,13 @@ class SearchPresenterTest {
 		saveSearchTerm = SaveSearchTerm(searchHistoryRepository)
 	)
 
-	@AfterTest
+	@After
 	fun after() {
 		mockWebServer.shutdown()
 	}
 
 	@Test
-	fun `test search term history with search term and data`() = runTest {
+	fun `matching search terms are returned `() = runTest {
 		searches.searchQueries.insert("BA1234")
 		searches.searchQueries.insert("BA1232")
 		searches.searchQueries.insert("UAL1")
@@ -58,7 +69,7 @@ class SearchPresenterTest {
 	}
 
 	@Test
-	fun `test search term history with search term and no data`() = runTest {
+	fun `search terms are not returned when no saved searches`() = runTest {
 		searchPresenter.test {
 			val firstState = awaitItem()
 			firstState.eventSink(SearchScreen.Event.SearchChange(SearchTerm("BA")))
@@ -68,7 +79,7 @@ class SearchPresenterTest {
 	}
 
 	@Test
-	fun `test save search term`() = runTest {
+	fun `search term is saved when searching`() = runTest {
 		searchPresenter.test {
 			val firstState = awaitItem()
 			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("BA1234")))
@@ -81,7 +92,7 @@ class SearchPresenterTest {
 
 
 	@Test
-	fun `test flights are returned when searching`() = runTest {
+	fun `saved searches are returned when searching`() = runTest {
 		searchPresenter.test {
 			val firstState = awaitItem()
 			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("BA1234")))
@@ -89,6 +100,32 @@ class SearchPresenterTest {
 			cancelAndConsumeRemainingEvents()
 			val search = searches.searchQueries.selectAll().executeAsOne()
 			assertEquals("BA1234", search.search)
+		}
+	}
+
+	@Test
+	fun `flights are returned`() = runTest {
+		mockWebServer.enqueue(
+			MockResponse()
+				.setResponseCode(200)
+				.setBody(
+					SIA_RESPONSE
+				)
+		)
+		searchPresenter.test {
+			val firstState = awaitItem()
+			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("SIA321")))
+			assertIs<SearchPresenter.FlightPresentation.Loaded>(
+				awaitItem().presentation
+			)
+			assertEquals(SearchPresenter.FlightPresentation.Loading, awaitItem().presentation)
+			val result = awaitItem()
+			val presentation = result.presentation
+			assertTrue(presentation is SearchPresenter.FlightPresentation.Loaded)
+			val flightResults = presentation.flightResults
+			assertTrue(flightResults is FlightResults.ActiveFlightFound)
+			assertEquals(Flight.Id("SIA321"), flightResults.flight.id)
+			assertEquals(true, flightResults.flight.isActive)
 		}
 	}
 }

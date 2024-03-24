@@ -53,6 +53,14 @@ kotlin {
 	}
 }
 
+koverReport {
+	defaults {
+		html {
+
+		}
+	}
+}
+
 android {
 	namespace = "jt.flights.features.search"
 	compileSdk = 34

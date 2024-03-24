@@ -53,6 +53,7 @@ public actual fun SearchUi(
 			Column(
 				horizontalAlignment = Alignment.CenterHorizontally,
 				modifier = Modifier.padding(8.dp)
+				.zIndex(1f)
 			) {
 				SearchBar(
 					shadowElevation = 4.dp,
