@@ -1,7 +1,21 @@
 plugins {
-	id("jt.flights.jvm")
+	alias(libs.plugins.kotlin.multiplatform)
 }
 
-dependencies {
-	api(libs.kotlinx.datetime)
+kotlin {
+	jvm()
+	@Suppress("OPT_IN_USAGE")
+	compilerOptions {
+		jvm {
+			jvmToolchain(11)
+			explicitApi()
+		}
+	}
+	sourceSets {
+		commonMain {
+			dependencies {
+				api(libs.kotlinx.datetime)
+			}
+		}
+	}
 }

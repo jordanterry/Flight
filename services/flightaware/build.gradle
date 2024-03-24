@@ -1,18 +1,18 @@
 plugins {
-	id("jt.flights.jvm")
+	alias(libs.plugins.kotlin.multiplatform)
 	alias(libs.plugins.kotlinx.serialization)
-	alias(libs.plugins.gmazzo.buildconfig)
 }
 
-buildConfig {
-	buildConfigField("String", "FLIGHT_AWARE_TOKEN", "\"" + System.getenv("FLIGHT_AWARE_TOKEN").toString() + "\"")
-}
-
-dependencies {
-	api(libs.kotlinx.datetime)
-	api(libs.kotlinx.serialization.core)
-	api(libs.square.okhttp)
-	api(projects.foundation.models)
-
-	implementation(platform(libs.square.okhttp.platform))
+kotlin {
+	jvm()
+	sourceSets {
+		commonMain {
+			dependencies {
+				api(libs.kotlinx.datetime)
+				api(libs.kotlinx.serialization.core)
+				api(libs.square.okhttp)
+				api(projects.foundation.models)
+			}
+		}
+	}
 }
