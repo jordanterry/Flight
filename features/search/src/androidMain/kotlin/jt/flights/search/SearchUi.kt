@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,8 +34,7 @@ import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import jt.flights.search.ui.DetailedFlightCard
-import jt.flights.search.ui.FlightCardLHRToMIA
+import jt.flights.search.ui.FlightCard
 import jt.flights.search.usecases.FlightResults
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -54,7 +54,7 @@ public actual fun SearchUi(
 				horizontalAlignment = Alignment.CenterHorizontally,
 				modifier = Modifier.padding(8.dp)
 			) {
-				DockedSearchBar(
+				SearchBar(
 					shadowElevation = 4.dp,
 					leadingIcon = {
 						if (active.value) {
@@ -141,12 +141,11 @@ public actual fun SearchUi(
 				.fillMaxSize(),
 			verticalArrangement = Arrangement.SpaceEvenly,
 		) {
-			FlightCardLHRToMIA()
 
 			when (val presentation = state.presentation) {
 				is SearchPresenter.FlightPresentation.Loaded ->  {
 					when (presentation.flightResults) {
-						is FlightResults.ActiveFlightFound -> DetailedFlightCard(presentation.flightResults.flight)
+						is FlightResults.ActiveFlightFound -> FlightCard(presentation.flightResults.flight)
 						FlightResults.NoActiveFlightsFound -> Text("There are no active flights.")
 						FlightResults.NoResultsFound -> Text("No results found.")
 						FlightResults.JustSearch -> Box(modifier)
