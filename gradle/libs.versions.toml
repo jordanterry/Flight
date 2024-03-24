@@ -25,7 +25,7 @@ ui-android = "1.6.4"
 ui-graphics-android = "1.6.4"
 ui-text-android = "1.6.4"
 gmazzo-buildconfig = "5.3.5"
-ui-tooling-preview-android = "1.6.4"
+compose = "1.6.4"
 ui-unit-android = "1.6.4"
 room = "2.6.1"
 kotlin-ksp = "1.9.22-1.0.17"
@@ -38,7 +38,8 @@ androidx-compose-activity = { module = "androidx.activity:activity-compose", ver
 androidx-compose-ui-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-core = { module = "androidx.core:core", version.ref = "core" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle-viewmodel" }
-androidx-ui-tooling-preview-android = { module = "androidx.compose.ui:ui-tooling-preview-android", version.ref = "ui-tooling-preview-android" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 circuit-foundation = { module = "com.slack.circuit:circuit-foundation", version.ref = "slack-circuit" }
 circuit-test = { module = "com.slack.circuit:circuit-test", version.ref = "slack-circuit" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-stdlib" }

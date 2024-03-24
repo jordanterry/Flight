@@ -24,6 +24,7 @@ kotlin {
             implementation(libs.androidx.core)
             implementation(libs.androidx.lifecycle.viewmodel)
 			implementation(libs.android.driver)
+			implementation(projects.features.search)
         }
         commonMain.dependencies {
 			implementation(compose.material3)
@@ -38,7 +39,6 @@ kotlin {
 			implementation(libs.kotlin.stdlib)
 			implementation(libs.kotlinx.collections.immutable.jvm)
 			implementation(libs.square.okhttp)
-			implementation(projects.features.search)
 			implementation(projects.foundation.networking)
 			implementation(projects.services.flightaware)
 			implementation(projects.services.search)
@@ -77,6 +77,6 @@ android {
 
 
 	dependencies {
-		debugImplementation(libs.androidx.ui.tooling.preview.android)
+		implementation(libs.compose.ui.tooling)
 	}
 }

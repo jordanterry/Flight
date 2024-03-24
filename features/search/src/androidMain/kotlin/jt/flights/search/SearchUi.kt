@@ -34,6 +34,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import jt.flights.search.ui.DetailedFlightCard
+import jt.flights.search.ui.FlightCardLHRToMIA
 import jt.flights.search.usecases.FlightResults
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -140,7 +141,7 @@ public actual fun SearchUi(
 				.fillMaxSize(),
 			verticalArrangement = Arrangement.SpaceEvenly,
 		) {
-
+			FlightCardLHRToMIA()
 
 			when (val presentation = state.presentation) {
 				is SearchPresenter.FlightPresentation.Loaded ->  {
