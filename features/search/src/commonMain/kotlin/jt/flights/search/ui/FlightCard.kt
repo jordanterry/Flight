@@ -31,7 +31,7 @@ import kotlinx.datetime.Instant
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun FlightCard(
+internal fun FlightCard(
 	flight: Flight,
 ) {
 	Card(
@@ -51,7 +51,7 @@ fun FlightCard(
 }
 
 @Composable
-fun FlightHeader(
+internal fun FlightHeader(
 	flight: Flight,
 ) {
 	Column {
@@ -92,7 +92,7 @@ fun FlightHeader(
 
 @Composable
 @Preview
-fun HeaderPreview() {
+internal fun HeaderPreview() {
 	val flight = Flight(
 		id = Flight.Id("Vir5c"),
 		from = Flight.Airport("London Heathrow", "LHR"),
@@ -107,7 +107,7 @@ fun HeaderPreview() {
 }
 
 @Composable
-fun ToAndFromAirportInfo(
+internal fun ToAndFromAirportInfo(
 	flightTime: String? = null,
 	from: Flight.Airport,
 	to: Flight.Airport,
@@ -172,7 +172,7 @@ public fun StackedAirportInfo(
 }
 
 @Composable
-fun StartAlignedStackedAirport(
+internal fun StartAlignedStackedAirport(
 	airport: Flight.Airport,
 	modifier: Modifier = Modifier,
 ) {
@@ -183,7 +183,7 @@ fun StartAlignedStackedAirport(
 	)
 }
 @Composable
-fun EndAlignedStackedAirport(
+internal fun EndAlignedStackedAirport(
 	airport: Flight.Airport,
 	modifier: Modifier = Modifier,
 ) {
@@ -198,7 +198,7 @@ fun EndAlignedStackedAirport(
 
 @Preview
 @Composable
-fun ToAndFromLHRToLGW() {
+internal fun ToAndFromLHRToLGW() {
 	ToAndFromAirportInfo(
 		from = Flight.Airport("London Heathrow", "LHR"),
 		to = Flight.Airport("London Gatwick", "LGW"),
@@ -209,7 +209,7 @@ fun ToAndFromLHRToLGW() {
 
 @Preview
 @Composable
-fun StartAlignedLondonHeathrow() {
+internal fun StartAlignedLondonHeathrow() {
 	StartAlignedStackedAirport(
 		airport = Flight.Airport("London Heathrow", "LHR"),
 		modifier = Modifier.wrapContentSize()
@@ -219,7 +219,7 @@ fun StartAlignedLondonHeathrow() {
 
 @Preview
 @Composable
-fun EndAlignedLondonHeathrow() {
+internal fun EndAlignedLondonHeathrow() {
 	EndAlignedStackedAirport(
 		airport = Flight.Airport("London Heathrow", "LHR"),
 		modifier = Modifier.wrapContentSize()

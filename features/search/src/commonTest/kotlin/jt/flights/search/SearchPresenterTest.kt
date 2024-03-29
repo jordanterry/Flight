@@ -1,15 +1,20 @@
 package jt.flights.search
 
 import SIA_RESPONSE
-import app.cash.paparazzi.Paparazzi
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.slack.circuit.test.test
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.collections.shouldHaveSingleElement
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import jt.flights.Searches
 import jt.flights.model.Flight
 import jt.flights.networking.Network
 import jt.flights.networking.OkHttpNetwork
 import jt.flights.search.usecases.AllSearchHistory
-import jt.flights.search.usecases.FlightResults
 import jt.flights.search.usecases.SearchHistoryForTerm
 import jt.flights.search.usecases.SaveSearchTerm
 import jt.flights.search.usecases.SearchResultsForFlightNumber
@@ -17,20 +22,11 @@ import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Rule
 import org.junit.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertIs
-import kotlin.test.assertTrue
 
 class SearchPresenterTest {
 
-	@get:Rule
-	val paparazzi = Paparazzi()
-
-	private val mockWebServer: MockWebServer = MockWebServer().apply {
-		start()
-	}
+	private val mockWebServer = MockWebServer()
 	private val driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY, schema = Searches.Schema)
 	private val searches = Searches(driver)
 	private val searchHistoryRepository = SearchHistoryRepository(searches)
@@ -60,46 +56,78 @@ class SearchPresenterTest {
 		searches.searchQueries.insert("BA1232")
 		searches.searchQueries.insert("UAL1")
 		searchPresenter.test {
-			val firstState = awaitItem()
-			firstState.eventSink(SearchScreen.Event.SearchChange(SearchTerm("BA")))
-			assertEquals(0, firstState.searchResults.size)
-			assertEquals(0, awaitItem().searchResults.size) // recompose
-			assertEquals(2, awaitItem().searchResults.size) // results loaded
+			// Initial item
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.also { it.eventSink(SearchScreen.Event.SearchChange(SearchTerm("BA"))) }
+				.pastSearchTerms
+				.shouldBeEmpty()
+
+			// Recomposition after event
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.pastSearchTerms
+				.shouldBeEmpty()
+
+			// Search results
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.pastSearchTerms
+				.shouldHaveSize(2)
 		}
 	}
 
 	@Test
 	fun `search terms are not returned when no saved searches`() = runTest {
 		searchPresenter.test {
-			val firstState = awaitItem()
-			firstState.eventSink(SearchScreen.Event.SearchChange(SearchTerm("BA")))
-			assertEquals(0, firstState.searchResults.size)
-			assertEquals(0, awaitItem().searchResults.size) // recompose
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.also { it.eventSink(SearchScreen.Event.SearchChange(SearchTerm("BA"))) }
+				.pastSearchTerms
+				.shouldBeEmpty()
+
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.pastSearchTerms
+				.shouldBeEmpty()
 		}
 	}
 
 	@Test
 	fun `search term is saved when searching`() = runTest {
+		// Searching makes a network request!
+		// We don't want that in this test.
+		// But it is fine for now.
+		mockWebServer.enqueue(
+			MockResponse()
+				.setResponseCode(200)
+				.setBody(
+					SIA_RESPONSE
+				)
+		)
 		searchPresenter.test {
-			val firstState = awaitItem()
-			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("BA1234")))
-			assertEquals(0, firstState.searchResults.size)
-			cancelAndConsumeRemainingEvents()
-			val search = searches.searchQueries.selectAll().executeAsOne()
-			assertEquals("BA1234", search.search)
-		}
-	}
+			// Initial screen and initial state
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.also { it.eventSink(SearchScreen.Event.Search(SearchTerm("BA1234"))) }
+				.pastSearchTerms
+				.shouldBeEmpty()
 
+			// Recomposition from save
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.pastSearchTerms
+				.shouldBeEmpty()
 
-	@Test
-	fun `saved searches are returned when searching`() = runTest {
-		searchPresenter.test {
-			val firstState = awaitItem()
-			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("BA1234")))
-			assertEquals(0, firstState.searchResults.size)
-			cancelAndConsumeRemainingEvents()
-			val search = searches.searchQueries.selectAll().executeAsOne()
-			assertEquals("BA1234", search.search)
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.content
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded.Content.Initial>()
+
+			searches.searchQueries
+				.selectAll()
+				.executeAsList()
+				.shouldHaveSingleElement { search -> search.search == "BA1234" }
 		}
 	}
 
@@ -113,19 +141,31 @@ class SearchPresenterTest {
 				)
 		)
 		searchPresenter.test {
-			val firstState = awaitItem()
-			firstState.eventSink(SearchScreen.Event.Search(SearchTerm("SIA321")))
-			assertIs<SearchPresenter.FlightPresentation.Loaded>(
-				awaitItem().presentation
-			)
-			assertEquals(SearchPresenter.FlightPresentation.Loading, awaitItem().presentation)
-			val result = awaitItem()
-			val presentation = result.presentation
-			assertTrue(presentation is SearchPresenter.FlightPresentation.Loaded)
-			val flightResults = presentation.flightResults
-			assertTrue(flightResults is FlightResults.ActiveFlightFound)
-			assertEquals(Flight.Id("SIA321"), flightResults.flight.id)
-			assertEquals(true, flightResults.flight.isActive)
+
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.also { it.eventSink(SearchScreen.Event.Search(SearchTerm("SIA321"))) }
+				.content
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded.Content.Initial>()
+
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.content
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded.Content.Initial>()
+
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+
+			awaitItem()
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded>()
+				.content
+				.shouldBeInstanceOf<SearchScreen.UiState.Loaded.Content.Found>()
+				.flight
+				.should { flight ->
+					flight.id.shouldBe(Flight.Id("SIA321"))
+					flight.isActive.shouldBeTrue()
+				}
+
 		}
 	}
 }

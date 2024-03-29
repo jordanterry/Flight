@@ -19,10 +19,7 @@ kotlin {
 	sourceSets {
 
         androidMain.dependencies {
-            implementation(libs.androidx.activity)
             implementation(libs.androidx.compose.activity)
-            implementation(libs.androidx.core)
-            implementation(libs.androidx.lifecycle.viewmodel)
 			implementation(libs.android.driver)
 			implementation(projects.features.search)
         }
@@ -35,9 +32,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.circuit.foundation)
 
-
-			implementation(libs.kotlin.stdlib)
-			implementation(libs.kotlinx.collections.immutable.jvm)
 			implementation(libs.square.okhttp)
 			implementation(projects.foundation.networking)
 			implementation(projects.services.flightaware)

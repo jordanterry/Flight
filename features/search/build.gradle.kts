@@ -1,30 +1,22 @@
 plugins {
-	alias(libs.plugins.android.library)
 	alias(libs.plugins.kotlin.multiplatform)
 	alias(libs.plugins.jetbrains.compose)
-	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.kotlinx.serialization)
-	id("app.cash.paparazzi") version("1.3.3")
 }
 
 kotlin {
-	androidTarget {
-		compilations.all {
 
-			compileJavaTaskProvider.configure {
-				targetCompatibility = "11"
-				sourceCompatibility = "11"
-			}
+	jvm {
+		compilations.all {
 			kotlinOptions {
 				jvmTarget = "11"
 			}
 		}
 	}
 
+	explicitApi()
+
 	sourceSets {
-		androidMain.dependencies {
-			implementation(libs.compose.ui.tooling.preview)
-		}
 		commonMain.dependencies {
 			api(libs.circuit.foundation)
 			api(projects.foundation.models)
@@ -47,28 +39,12 @@ kotlin {
 			implementation("app.cash.sqldelight:sqlite-driver:2.0.1")
 			implementation(libs.circuit.test)
 			implementation(libs.kotlin.test)
+			implementation("io.kotest:kotest-assertions-core:5.8.1")
 			implementation(libs.kotlinx.coroutines.test)
 			implementation(libs.square.okhttp.mockwebserver)
 		}
 	}
 }
 
-koverReport {
-	defaults {
-		html {
-
-		}
-	}
-}
-
-android {
-	namespace = "jt.flights.features.search"
-	compileSdk = 34
-	testOptions.unitTests.isReturnDefaultValues = true
-
-	dependencies {
-		implementation(libs.compose.ui.tooling)
-	}
-}
-
+// Required for Paparazzi
 apply(from = "guava-fix.gradle")

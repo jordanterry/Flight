@@ -15,8 +15,7 @@ internal fun SearchResultsForFlightNumber(
 	return SearchResultsForFlightNumber invoke@{ searchTerm ->
 		val flightResults = searchRepository.search(flightNumber = searchTerm)
 		if (flightResults.isNullOrEmpty()) return@invoke FlightResults.NoResultsFound
-		val activeFlight = flightResults.firstOrNull { flight -> flight.isActive }
-		if (activeFlight == null) return@invoke FlightResults.NoActiveFlightsFound
-		FlightResults.ActiveFlightFound(activeFlight)
+		val firstFlight = flightResults.firstOrNull() ?: return@invoke FlightResults.NoResultsFound
+		FlightResults.ActiveFlightFound(firstFlight)
 	}
 }

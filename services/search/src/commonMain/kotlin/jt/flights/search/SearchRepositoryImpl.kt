@@ -10,10 +10,10 @@ import kotlinx.coroutines.withContext
 public class SearchRepositoryImpl(
 	private val searchDataSource: SearchDataSource,
 ) : SearchRepository {
-	override suspend fun search(flightNumber: SearchTerm): List<Flight>? = withContext(Dispatchers.IO) {
-		if (flightNumber.value.isEmpty()) return@withContext emptyList()
+	override suspend fun search(flightNumber: SearchTerm): List<Flight>? {
+		if (flightNumber.value.isEmpty()) return emptyList()
 		val result = searchDataSource.search(flightNumber)
-		if (result.isSuccess) {
+		return if (result.isSuccess) {
 			result.getOrThrow()
 		} else {
 			null

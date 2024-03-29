@@ -5,7 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.slack.circuit.backstack.rememberSaveableBackStack
@@ -27,33 +30,8 @@ public class FlightActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
-		val cache = Cache(
-			directory = File(application.cacheDir, "http_cache"),
-			maxSize = 50L * 1024L * 1024L // 50 MiB
-		)
-		val okHttpClient = OkHttpClient
-			.Builder()
-			.addInterceptor(FlightAwareApiInterceptor.create(BuildConfig.FLIGHT_AWARE_TOKEN))
-			.cache(cache)
-			.build()
-		val network = OkHttpNetwork(okHttpClient)
-		val flightAwareUrl = "https://aeroapi.flightaware.com/aeroapi"
-		val driver: SqlDriver = AndroidSqliteDriver(Searches.Schema, this, "searches.db")
-
-		val circuit = Circuit.Builder()
-			.addPresenterFactory(SearchPresenterFactory(flightAwareUrl, network, driver))
-			.addUiFactory(SearchUiFactory())
-			.build()
-
 		setContent {
-			MaterialTheme {
-				CircuitCompositionLocals(circuit) {
-					val backstack = rememberSaveableBackStack(SearchScreen)
-					BackHandler(onBack = { /* do something on root */ })
-					val navigator = rememberCircuitNavigator(backstack)
-					NavigableCircuitContent(navigator, backstack)
-				}
-			}
+			(application as FlightApplication).flights.Render()
 		}
 	}
 }

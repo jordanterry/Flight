@@ -20,4 +20,10 @@ public value class SearchTerm(
 	public fun isEmpty(): Boolean {
 		return value.isEmpty()
 	}
+
+	companion object
 }
+
+
+val SearchTerm.Companion.empty
+	get() = SearchTerm("")
