@@ -2,6 +2,7 @@ plugins {
 	alias(libs.plugins.android.library)
 	alias(libs.plugins.kotlin.multiplatform)
 	alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlin.compose)
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.kotlinx.serialization)
 	id("app.cash.paparazzi") version("1.3.3")

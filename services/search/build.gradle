@@ -1,5 +1,6 @@
 plugins {
 	alias(libs.plugins.kotlin.multiplatform)
+	alias(libs.plugins.metro)
 	id "app.cash.sqldelight" version "2.0.1"
 }
 

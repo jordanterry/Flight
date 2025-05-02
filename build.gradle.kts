@@ -5,6 +5,8 @@ plugins {
 	alias(libs.plugins.square.sort.dependencies) apply false
 	alias(libs.plugins.kotlin.multiplatform) apply false
 	alias(libs.plugins.jetbrains.compose) apply false
+    alias(libs.plugins.metro) apply false
+    alias(libs.plugins.kotlin.compose) apply false
 	alias(libs.plugins.dependency.analysis)
 }
 

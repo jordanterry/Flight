@@ -1,23 +1,20 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.metro)
 
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlin.compose)
 }
 
 kotlin {
 	androidTarget()
 	@Suppress("OPT_IN_USAGE")
-	compilerOptions {
-		jvm {
-			jvmToolchain(11)
-			explicitApi()
-		}
-	}
+    jvmToolchain(17)
+    explicitApi()
 
 	sourceSets {
-
         androidMain.dependencies {
             implementation(libs.androidx.activity)
             implementation(libs.androidx.compose.activity)
@@ -34,7 +31,6 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.circuit.foundation)
-
 
 			implementation(libs.kotlin.stdlib)
 			implementation(libs.kotlinx.collections.immutable.jvm)
