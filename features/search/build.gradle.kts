@@ -5,22 +5,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.kotlinx.serialization)
-	id("app.cash.paparazzi") version("1.3.3")
+    alias(libs.plugins.cashapp.sqldelight)
 }
 
 kotlin {
-	androidTarget {
-		compilations.all {
-
-			compileJavaTaskProvider.configure {
-				targetCompatibility = "11"
-				sourceCompatibility = "11"
-			}
-			kotlinOptions {
-				jvmTarget = "11"
-			}
-		}
-	}
+    androidTarget()
+    compilerOptions {
+        jvmToolchain(21)
+    }
 
 	sourceSets {
 		androidMain.dependencies {
@@ -41,13 +33,14 @@ kotlin {
 			implementation(libs.kotlinx.serialization.json)
 			implementation(libs.kotlinx.coroutines)
 			implementation(libs.kotlinx.datetime)
-			implementation("app.cash.sqldelight:coroutines-extensions:2.0.1")
+			implementation(libs.cashapp.sqldelight.coroutinesExtensions)
 		}
 
 		commonTest.dependencies {
-			implementation("app.cash.sqldelight:sqlite-driver:2.0.1")
+			implementation(libs.cashapp.sqldelight.driver)
 			implementation(libs.circuit.test)
 			implementation(libs.kotlin.test)
+            implementation(libs.turbine)
 			implementation(libs.kotlinx.coroutines.test)
 			implementation(libs.square.okhttp.mockwebserver)
 		}
@@ -56,7 +49,7 @@ kotlin {
 
 android {
 	namespace = "jt.flights.features.search"
-	compileSdk = 34
+	compileSdk = 35
 	testOptions.unitTests.isReturnDefaultValues = true
 
 	dependencies {

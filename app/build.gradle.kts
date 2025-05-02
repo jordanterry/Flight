@@ -10,8 +10,7 @@ plugins {
 
 kotlin {
 	androidTarget()
-	@Suppress("OPT_IN_USAGE")
-    jvmToolchain(17)
+    jvmToolchain(21)
     explicitApi()
 
 	sourceSets {
@@ -54,10 +53,10 @@ android {
     }
 
     namespace = "jt.flights"
-	compileSdk = 34
+	compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
-		targetSdk = 34
-		minSdk = 28
+		targetSdk = libs.versions.android.targetSdk.get().toInt()
+		minSdk = libs.versions.android.minSdk.get().toInt()
         applicationId = "jt.flights"
         versionCode = 1
         versionName = "1.0"
@@ -70,7 +69,6 @@ android {
         checkDependencies = true
         ignoreTestSources = true
     }
-
 
 	dependencies {
 		implementation(libs.compose.ui.tooling)

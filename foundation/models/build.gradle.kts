@@ -1,11 +1,10 @@
 plugins {
 	alias(libs.plugins.kotlin.multiplatform)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.1.20"
 }
 
 kotlin {
 	jvm()
-    jvmToolchain(17)
+    jvmToolchain(21)
     explicitApi()
 	sourceSets {
 		commonMain {
